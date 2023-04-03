@@ -28,7 +28,7 @@
 }
 
 .slide-img button {
-  padding: 10px 15px;
+  padding: 10px 20px;
   border-radius: 20px;
   border: none;
   outline: none;
@@ -38,7 +38,6 @@
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  width: 25%;
   cursor: pointer;
   transition: 0.3s;
 }

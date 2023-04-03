@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 import store from './redux/configureStore';
 import App from './App';
 import Home from './components/Home/Home';
+import Login from './components/Login/Login';
 import ErrorPage from './error-page';
 import './index.css';
 
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Home />,
+      },
+      {
+        path: 'login',
+        element: <Login />,
       },
     ],
   },

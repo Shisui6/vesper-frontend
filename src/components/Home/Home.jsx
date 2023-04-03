@@ -1,5 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Carousel } from 'react-responsive-carousel';
 import { UilSignInAlt } from '@iconscout/react-unicons';
@@ -43,10 +44,12 @@ const renderSlides = imageData.map((image) => (
     <div className="slide-text">
       <h1>Experience Vesper</h1>
       <p>The ultimate car sharing experience</p>
-      <button type="button">
-        Login
-        <UilSignInAlt color="#fff" />
-      </button>
+      <Link to="login">
+        <button type="button">
+          Login
+          <UilSignInAlt color="#fff" />
+        </button>
+      </Link>
     </div>
     <img src={image.url} alt={image.alt} />
   </div>
