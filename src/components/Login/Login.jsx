@@ -4,12 +4,13 @@ import { useFormik } from 'formik';
 import axios, { AxiosError } from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { UilPrevious, UilRegistered } from '@iconscout/react-unicons';
-import { useSelector } from 'react-redux';
-import { selectNotice } from '../../redux/user/user';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectNotice, setUsername, setId } from '../../redux/user/user';
 
 const Login = () => {
   const [error, setError] = useState('');
   const notice = useSelector(selectNotice);
+  const dispatch = useDispatch();
   const signIn = useSignIn();
   const isAuthenticated = useIsAuthenticated();
   const navigate = useNavigate();
@@ -32,10 +33,15 @@ const Login = () => {
 
       if (isAuthenticated()) {
         navigate('/dashboard');
+        dispatch(setUsername(response.data.user.username));
+        dispatch(setId(response.data.user.id));
       }
     } catch (err) {
-      if (err && err instanceof AxiosError) setError(err.response.data.error);
-      else if (err && err instanceof Error) setError(err.message);
+      if (err && err instanceof AxiosError) {
+        setError(err.response.data.error);
+      } else {
+        setError(err.message);
+      }
     }
   };
 
