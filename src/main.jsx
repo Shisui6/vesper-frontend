@@ -5,12 +5,14 @@ import {
   RouterProvider,
 } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { AuthProvider, RequireAuth } from 'react-auth-kit';
 import store from './redux/configureStore';
 import App from './App';
 import Home from './components/Home/Home';
 import Login from './components/Login/Login';
 import ErrorPage from './error-page';
 import './index.css';
+import Dashboard from './components/Dashboard/Dashboard';
 
 const router = createBrowserRouter([
   {
@@ -26,6 +28,13 @@ const router = createBrowserRouter([
         path: 'login',
         element: <Login />,
       },
+      {
+        path: 'dashboard',
+        element:
+  <RequireAuth loginPath="/login">
+    <Dashboard />
+  </RequireAuth>,
+      },
     ],
   },
 ]);
@@ -33,7 +42,14 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
-      <RouterProvider router={router} />
+      <AuthProvider
+        authType="cookie"
+        authName="_auth"
+        cookieDomain={window.location.hostname}
+        cookieSecure={false}
+      >
+        <RouterProvider router={router} />
+      </AuthProvider>
     </Provider>
   </React.StrictMode>,
 );
