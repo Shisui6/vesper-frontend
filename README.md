@@ -5,7 +5,7 @@
 <details>
   <summary>📗 Table of Contents</summary>
   <ul>
-    <li><a href="#-car-rental-front-end-">📖 Car Rental Front End</a></li>
+    <li><a href="#-car-rental-front-end-">📖 Vesper</a></li>
     <li><a href="#-built-with-">🛠 Built With</a></li>
     <li><a href="#-getting-started-">💻 Getting Started</a></li>
     <li><a href="#-authors-">👥 Authors </a></li>
@@ -21,9 +21,10 @@
 
 <!-- PROJECT DESCRIPTION -->
 
-# 📖 Hello Rails Front End <a name="about-project"></a>
+# 📖 Vesper <a name="about-project"></a>
 
-**Car Rental Front End** is a react-redux app that fetches and displays data from rails API endpoints.
+**Vesper** is a full stack application for all lovers of cars. Create an account, and become part of our car sharing economy. Let your car make money for you by listing it on our platform so others can view and rent. Find and book your dream car today.
+![image](https://user-images.githubusercontent.com/37116322/229910070-8bd50835-1319-463c-a41a-4459f55d83f2.png)
 
 ## 🛠 Built With <a name="built-with"></a>
 
@@ -34,6 +35,7 @@
   <ul>
     <li><a href="https://react.dev/">React</a></li>
     <li><a href="https://redux.js.org/">Redux</a></li>
+    <li><a href="https://tailwindcss.com/">Tailwind</a></li>
   </ul>
 </details>
 
@@ -41,7 +43,10 @@
 
 ### Key Features <a name="key-features"></a>
 
-- Fetches data from rails API endpoints
+- User authentication
+- Users can view cars listed on the platform
+- Users can list and manage their own cars on the platform
+- Users can reserve cars listed on the platform
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -118,7 +123,7 @@ To run the project, execute the following command:
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-- [ ] Add more components
+- [ ] Add multi factor authentication
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
