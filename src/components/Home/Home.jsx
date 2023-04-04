@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Carousel } from 'react-responsive-carousel';
-import { UilSignInAlt } from '@iconscout/react-unicons';
+import { UilSignInAlt, UilRegistered } from '@iconscout/react-unicons';
 import './Home.css';
 import car1 from '../../images/car-1.jpg';
 import car2 from '../../images/car-2.jpg';
@@ -43,12 +43,20 @@ const renderSlides = imageData.map((image) => (
     <div className="slide-text">
       <h1>Experience Vesper</h1>
       <p>The ultimate car sharing experience</p>
-      <Link to="login">
-        <button type="button">
-          Login
-          <UilSignInAlt color="#fff" />
-        </button>
-      </Link>
+      <div className="flex">
+        <Link to="login">
+          <button type="button">
+            Login
+            <UilSignInAlt color="#fff" />
+          </button>
+        </Link>
+        <Link to="register">
+          <button type="button">
+            Sign up
+            <UilRegistered color="#fff" />
+          </button>
+        </Link>
+      </div>
     </div>
     <img src={image.url} alt={image.alt} />
   </div>

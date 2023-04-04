@@ -82,3 +82,8 @@ code {
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('login.jpg');
   background-size: cover;
 }
+
+.register {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('register.jpg');
+  background-size: cover;
+}

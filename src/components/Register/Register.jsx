@@ -1,41 +1,34 @@
 import React, { useState } from 'react';
-import { useSignIn, useIsAuthenticated } from 'react-auth-kit';
 import { useFormik } from 'formik';
 import axios, { AxiosError } from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
-import { UilPrevious, UilRegistered } from '@iconscout/react-unicons';
-import { useSelector } from 'react-redux';
-import { selectNotice } from '../../redux/user/user';
+import { UilPrevious, UilSignInAlt } from '@iconscout/react-unicons';
+import { useDispatch } from 'react-redux';
+import { setNotice } from '../../redux/user/user';
 
 const Login = () => {
   const [error, setError] = useState('');
-  const notice = useSelector(selectNotice);
-  const signIn = useSignIn();
-  const isAuthenticated = useIsAuthenticated();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const onSubmit = async (values) => {
     setError('');
 
     try {
       const response = await axios.post(
-        'http://localhost:3000/auth/login',
+        'http://localhost:3000/users',
         values,
       );
-
-      signIn({
-        token: response.data.token,
-        expiresIn: 3600,
-        tokenType: 'Bearer',
-        authState: { username: values.username },
-      });
-
-      if (isAuthenticated()) {
-        navigate('/dashboard');
+      if (response.status === 201) {
+        dispatch(setNotice('Account created successfully!'));
+        navigate('/login');
       }
     } catch (err) {
-      if (err && err instanceof AxiosError) setError(err.response.data.error);
-      else if (err && err instanceof Error) setError(err.message);
+      if (err && err instanceof AxiosError) {
+        setError(err.response.data.error);
+      } else {
+        setError(err.message);
+      }
     }
   };
 
@@ -47,23 +40,14 @@ const Login = () => {
     onSubmit,
   });
 
-  const handleNotice = () => {
-    if (error) {
-      return <span className=" text-red-900 bg-red-200 rounded-xl font-small mt-10 block w-fit mx-auto px-8 py-1">{error}</span>;
-    } if (notice) {
-      return <span className="text-green-900 bg-green-200 rounded-xl font-small mt-10 block w-fit mx-auto px-8 py-1">{notice}</span>;
-    }
-    return '';
-  };
-
   return (
     <main className="w-full flex Login">
-      <div className="relative flex-1 hidden pt-36 justify-center h-screen login lg:flex">
+      <div className="relative flex-1 hidden pt-36 justify-center h-screen register lg:flex">
         <div className="relative z-10 w-full max-w-md">
           <div className=" mt-16 space-y-3">
-            <h3 className="text-white text-3xl font-bold">Become a member of our sharing community</h3>
+            <h3 className="text-white text-3xl font-bold">Ready to start your new journey?</h3>
             <p className="text-gray-300">
-              Login to your account and get access to all features.
+              Create your account and start your new journey with us.
             </p>
           </div>
         </div>
@@ -78,8 +62,8 @@ const Login = () => {
         <div className="w-full max-w-md space-y-8 px-4 bg-white text-gray-600 sm:px-0">
           <div className="">
             <div className="mt-5 space-y-2 text-center">
-              <h3 className="text-center text-gray-800 text-2xl font-bold sm:text-3xl">Welcome Back!</h3>
-              {handleNotice()}
+              <h3 className="text-center text-gray-800 text-2xl font-bold sm:text-3xl">Join Us!</h3>
+              {error ? <span className=" text-red-900 font-medium mt-10 block">{error}</span> : ''}
             </div>
           </div>
           <form
@@ -112,7 +96,7 @@ const Login = () => {
               type="submit"
               className="w-full px-4 py-2 text-white font-medium bg-green-600 hover:bg-green-500 active:bg-green-600 rounded-2xl duration-150"
             >
-              Login
+              Register
             </button>
           </form>
           <Link to="/" className="block">
@@ -124,13 +108,13 @@ const Login = () => {
               <UilPrevious />
             </button>
           </Link>
-          <Link to="/register" className="block">
+          <Link to="/login" className="block">
             <button
               type="button"
               className="flex items-center font-medium duration-150 mx-auto hover:text-gray-300"
             >
-              Sign up
-              <UilRegistered />
+              Login
+              <UilSignInAlt />
             </button>
           </Link>
         </div>
