@@ -34,7 +34,7 @@ const Login = () => {
         dispatch(setUsername(response.data.user.username));
         dispatch(setId(response.data.user.id));
         navigate('/cars');
-      }, 1000);
+      }, 500);
     } catch (err) {
       if (err && err instanceof AxiosError) {
         setError(err.response.data.error);

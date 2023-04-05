@@ -72,7 +72,7 @@ const Navbar = () => {
   }
 
   return (
-    <nav className="Navbar absolute left-0 h-screen w-52 shadow-lg flex flex-col justify-between py-10 px-4">
+    <nav className="Navbar absolute left-0 h-screen w-52 shadow-lg flex flex-col justify-between py-10 px-4 fade-in">
       <div className="flex items-center justify-between">
         <h2 className=" font-extrabold tracking-wide text-2xl">Vesper</h2>
         <img src="/profile.png" alt="profile" className=" w-10 h-10" />
