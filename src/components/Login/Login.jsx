@@ -33,8 +33,8 @@ const Login = () => {
       setTimeout(() => {
         dispatch(setUsername(response.data.user.username));
         dispatch(setId(response.data.user.id));
-        navigate('/dashboard');
-      }, 1000);
+        navigate('/cars');
+      }, 500);
     } catch (err) {
       if (err && err instanceof AxiosError) {
         setError(err.response.data.error);
