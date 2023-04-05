@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useSignIn, useIsAuthenticated } from 'react-auth-kit';
+import { useSignIn } from 'react-auth-kit';
 import { useFormik } from 'formik';
 import axios, { AxiosError } from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
@@ -12,7 +12,6 @@ const Login = () => {
   const notice = useSelector(selectNotice);
   const dispatch = useDispatch();
   const signIn = useSignIn();
-  const isAuthenticated = useIsAuthenticated();
   const navigate = useNavigate();
 
   const onSubmit = async (values) => {
@@ -31,11 +30,11 @@ const Login = () => {
         authState: { username: values.username },
       });
 
-      if (isAuthenticated()) {
-        navigate('/dashboard');
+      setTimeout(() => {
         dispatch(setUsername(response.data.user.username));
         dispatch(setId(response.data.user.id));
-      }
+        navigate('/dashboard');
+      }, 1000);
     } catch (err) {
       if (err && err instanceof AxiosError) {
         setError(err.response.data.error);
