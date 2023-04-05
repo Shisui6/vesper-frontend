@@ -12,7 +12,7 @@ import Home from './components/Home/Home';
 import Login from './components/Login/Login';
 import ErrorPage from './error-page';
 import './index.css';
-import Dashboard from './components/Dashboard/Dashboard';
+import Cars from './components/Cars/Cars';
 import Register from './components/Register/Register';
 
 const router = createBrowserRouter([
@@ -34,10 +34,10 @@ const router = createBrowserRouter([
         element: <Register />,
       },
       {
-        path: 'dashboard',
+        path: 'cars',
         element:
   <RequireAuth loginPath="/login">
-    <Dashboard />
+    <Cars />
   </RequireAuth>,
       },
     ],

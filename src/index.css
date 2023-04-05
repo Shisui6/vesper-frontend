@@ -87,3 +87,7 @@ code {
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('register.jpg');
   background-size: cover;
 }
+
+.Navlink:hover {
+  background-color: #97bf0f;
+}
