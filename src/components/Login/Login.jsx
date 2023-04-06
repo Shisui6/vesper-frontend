@@ -25,9 +25,12 @@ const Login = () => {
 
       signIn({
         token: response.data.token,
-        expiresIn: 3600,
+        expiresIn: 30,
         tokenType: 'Bearer',
-        authState: { username: values.username },
+        authState: {
+          id: response.data.user.id,
+          username: response.data.user.username,
+        },
       });
 
       setTimeout(() => {

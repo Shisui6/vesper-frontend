@@ -35,7 +35,7 @@ const Navbar = () => {
   if (windowDimension < 768) {
     return (
       <nav>
-        <ul className="absolute top-0 bottom-0 shadow-lg py-3 rounded-r-xl mx-0 my-auto h-fit">
+        <ul className="fixed top-0 bottom-0 shadow-lg rounded-r-xl mx-0 my-auto h-fit">
           <li>
             <NavLink to="cars" className="Navlink flex gap-2 p-3 rounded-tr-xl mb-2 text-sm items-center cursor-pointer hover:text-white hover:bg-[#97bf0f] duration-100" style={({ isActive }) => (isActive ? { backgroundColor: '#97bf0f', color: '#fff' } : {})}>
               <UilCarSideview />
@@ -61,7 +61,7 @@ const Navbar = () => {
               <UilTrashAlt />
             </NavLink>
           </li>
-          <li className="Navlink flex gap-2 p-3 rounded-xl mb-2 text-sm items-center cursor-pointer hover:text-white hover:bg-[#97bf0f] duration-100">
+          <li className="Navlink flex gap-2 p-3 rounded-br-xl mb-2 text-sm items-center cursor-pointer hover:text-white hover:bg-[#97bf0f] duration-100">
             <button type="button" onClick={logout} className="flex items-center gap-2">
               <UilSignout />
             </button>
@@ -72,7 +72,7 @@ const Navbar = () => {
   }
 
   return (
-    <nav className="Navbar absolute left-0 h-screen w-52 shadow-lg flex flex-col justify-between py-10 px-4 fade-in">
+    <nav className="Navbar fixed left-0 h-screen w-52 shadow-lg flex flex-col justify-between py-10 px-4 fade-in">
       <div className="flex items-center justify-between">
         <h2 className=" font-extrabold tracking-wide text-2xl">Vesper</h2>
         <img src="/profile.png" alt="profile" className=" w-10 h-10" />

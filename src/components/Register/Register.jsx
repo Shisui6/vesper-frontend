@@ -63,7 +63,7 @@ const Login = () => {
           <div className="">
             <div className="mt-5 space-y-2 text-center">
               <h3 className="text-center text-gray-800 text-2xl font-bold sm:text-3xl">Join Us!</h3>
-              {error ? <span className=" text-red-900 font-medium mt-10 block">{error}</span> : ''}
+              {error ? <span className=" text-red-900 bg-red-200 rounded-xl font-small mt-10 block w-fit mx-auto px-8 py-1">{error}</span> : ''}
             </div>
           </div>
           <form
