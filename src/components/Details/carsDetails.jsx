@@ -11,7 +11,7 @@ import {
   import { SlSettings } from 'react-icons/sl';
 
 const DetailsCarScreen = () => {
-  // const [booking, setBooking] = useState(false);
+  const [booking, setBooking] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
   const carDetails = useSelector((state) => state.cars);
@@ -68,7 +68,7 @@ const DetailsCarScreen = () => {
                 <button
                   type="button"
                   className="bg-lime-500 text-white hover:bg-lime-400 px-6 py-2 rounded-full font-semibold min-w-[10rem] transition-colors border-2 border-transparent mb-4"
-                  // onClick={() => setBooking(true)}
+                  onClick={() => setBooking(true)}
                 >
                   <div className="flex items-center gap-3 justify-center">
                     <SlSettings />
@@ -91,13 +91,13 @@ const DetailsCarScreen = () => {
       >
         <BsFillArrowLeftCircleFill />
       </div>
-      {/* {booking && (
+      {booking && (
         <div
           className="fixed md:flex md:items-center md:justify-center w-full h-full 
              top-0 left-0 z-50 
             "
         >
-          <BookingPopUp carId={id} onClose={() => setBooking(false)} />
+          {/* <BookingPopUp carId={id} onClose={() => setBooking(false)} /> */}
           <div
             className="
                   absolute top-0 left-0 w-full h-full bg-black
@@ -105,7 +105,7 @@ const DetailsCarScreen = () => {
                 "
           />
         </div>
-      )} */}
+      )}
     </>
   );
 };
