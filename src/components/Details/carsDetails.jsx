@@ -1,27 +1,46 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useAuthHeader } from 'react-auth-kit';
+import { useParams, useDispatch } from 'react-router-dom';
 // import { useParams, useNavigate } from 'react-router-dom';
 import { AiOutlineRight } from 'react-icons/ai';
-
-import {
-  BsArrowRightCircleFill,
-  BsFillArrowLeftCircleFill,
-} from 'react-icons/bs';
-import { SlSettings } from 'react-icons/sl';
 import Loader from '../Loader/Loader';
+import { fetchCars } from '../../redux/cars/cars';
 
 const DetailsCarScreen = () => {
-  const [booking, setBooking] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
+  const authHeader = useAuthHeader();
   const { id } = useParams();
-  // const navigate = useNavigate();
   const carDetails = useSelector((state) => state.cars);
-  const { loading, cars } = carDetails;
+  const cars = carDetails;
   const carss = cars?.find((c) => c.id === parseInt(id, 10));
+
+  useEffect(() => {
+    dispatch(fetchCars(authHeader()));
+    setTimeout(() => {
+      setLoading(false);
+    }, 3800);
+  }, [dispatch]);
+
+  if (loading) {
+    return <Loader />;
+  }
+
+  if (!cars) {
+    return (
+      <>
+        <h2>Sorry</h2>
+        <p>
+          There is no car in Garage
+        </p>
+
+      </>
+    );
+  }
 
   return (
     <>
-      {loading && <Loader />}
       {carss && (
         <div className="flex flex-col items-center md:justify-start justify-center w-full md:flex-row grow h-full lg:pt-20 lg:pb-10">
           <div className="grow  md:w-5/6 flex items-center justify-center md:px-10 rounded-full aspect-square">
@@ -68,47 +87,8 @@ const DetailsCarScreen = () => {
                 {' '}
                 <AiOutlineRight className="text-yellow-500" />
               </p>
-              {/* <img src={pic} alt="canva" /> */}
-              <div className="my-6 flex justify-center">
-                <button
-                  type="button"
-                  className="bg-lime-500 text-white hover:bg-lime-400 px-6 py-2 rounded-full font-semibold min-w-[10rem] transition-colors border-2 border-transparent mb-4"
-                  onClick={() => setBooking(true)}
-                >
-                  <div className="flex items-center gap-3 justify-center">
-                    <SlSettings />
-                    <span>Reserve</span>
-                    <BsArrowRightCircleFill />
-                  </div>
-                </button>
-              </div>
             </div>
           </div>
-        </div>
-      )}
-      <div
-        className="fixed text-[1.8rem]
-                            bottom-14 left-60 z-10 bg-[#98bd2a] text-white
-                            rounded-full p-3 cursor-pointer
-                            hidden md:block
-                            "
-        // onClick={() => navigate(-1)}
-      >
-        <BsFillArrowLeftCircleFill />
-      </div>
-      {booking && (
-        <div
-          className="fixed md:flex md:items-center md:justify-center w-full h-full
-             top-0 left-0 z-50
-            "
-        >
-          {/* <BookingPopUp carId={id} onClose={() => setBooking(false)} /> */}
-          <div
-            className="
-                  absolute top-0 left-0 w-full h-full bg-black
-                  opacity-80
-                "
-          />
         </div>
       )}
     </>
