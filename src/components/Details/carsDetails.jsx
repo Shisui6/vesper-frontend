@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import Loader from '../Loader/Loader';
 import { useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
+import Loader from '../Loader/Loader';
 import { AiOutlineRight } from 'react-icons/ai';
 
 import {
   BsArrowRightCircleFill,
   BsFillArrowLeftCircleFill,
-  } from 'react-icons/bs';
+} from 'react-icons/bs';
 import { SlSettings } from 'react-icons/sl';
 
 const DetailsCarScreen = () => {
@@ -54,13 +54,16 @@ const DetailsCarScreen = () => {
                   <li className="odd:bg-gray-200 bg-gray-100 py-2 px-4">
                     <div className="flex items-center justify-center">
                       <span className="pr-10">Model</span>
-                      <span className="text-right">${carss?.model}</span>
+                      <span className="text-right">
+                        ${carss?.model}
+                      </span>
                     </div>
                   </li>
                 </ul>
               </div>
               <p className="flex items-center gap-2 mt-1">
-                DISCOVER MORE MODELS{' '}
+                DISCOVER MORE MODELS
+                {' '}
                 <AiOutlineRight className="text-yellow-500" />
               </p>
               {/* <img src={pic} alt="canva" /> */}
