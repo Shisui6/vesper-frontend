@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
-import Loader from '../Loader/Loader';
 import { AiOutlineRight } from 'react-icons/ai';
 
 import {
@@ -9,6 +8,7 @@ import {
   BsFillArrowLeftCircleFill,
 } from 'react-icons/bs';
 import { SlSettings } from 'react-icons/sl';
+import Loader from '../Loader/Loader';
 
 const DetailsCarScreen = () => {
   const [booking, setBooking] = useState(false);
@@ -55,7 +55,8 @@ const DetailsCarScreen = () => {
                     <div className="flex items-center justify-center">
                       <span className="pr-10">Model</span>
                       <span className="text-right">
-                        ${carss?.model}
+                        $
+                        {carss?.model}
                       </span>
                     </div>
                   </li>
@@ -90,13 +91,13 @@ const DetailsCarScreen = () => {
                             rounded-full p-3 cursor-pointer
                             hidden md:block
                             "
-        onClick={() => navigate(-1)}
+        // onClick={() => navigate(-1)}
       >
         <BsFillArrowLeftCircleFill />
       </div>
       {booking && (
         <div
-          className="fixed md:flex md:items-center md:justify-center w-full h-full 
+          className="fixed md:flex md:items-center md:justify-center w-full h-full
              top-0 left-0 z-50 
             "
         >
