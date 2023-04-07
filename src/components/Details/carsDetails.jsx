@@ -13,7 +13,7 @@ import Loader from '../Loader/Loader';
 const DetailsCarScreen = () => {
   const [booking, setBooking] = useState(false);
   const { id } = useParams();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const carDetails = useSelector((state) => state.cars);
   const { loading, cars } = carDetails;
   const carss = cars?.find((c) => c.id === parseInt(id, 10));
@@ -98,7 +98,7 @@ const DetailsCarScreen = () => {
       {booking && (
         <div
           className="fixed md:flex md:items-center md:justify-center w-full h-full
-             top-0 left-0 z-50 
+             top-0 left-0 z-50
             "
         >
           {/* <BookingPopUp carId={id} onClose={() => setBooking(false)} /> */}
