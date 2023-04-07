@@ -42,7 +42,7 @@ const router = createBrowserRouter([
   </RequireAuth>,
       },
       {
-        path: 'car',
+        path: 'cars/:id',
         element:
   <RequireAuth loginPath="/login">
     <DetailsCarScreen />
