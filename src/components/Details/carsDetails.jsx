@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
+import Loader from '../Loader/Loader';
 import { useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
-import Loader from '../Loader/Loader';
 import { AiOutlineRight } from 'react-icons/ai';
 
 import {
-    BsArrowRightCircleFill,
-    BsFillArrowLeftCircleFill,
+  BsArrowRightCircleFill,
+  BsFillArrowLeftCircleFill,
   } from 'react-icons/bs';
-  import { SlSettings } from 'react-icons/sl';
+import { SlSettings } from 'react-icons/sl';
 
 const DetailsCarScreen = () => {
   const [booking, setBooking] = useState(false);
