@@ -25,9 +25,6 @@ export const carsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchCars.pending, (state) => {
-        state.isLoading = true;
-      })
       .addCase(fetchCars.fulfilled, (state, action) => {
         state.isLoading = false;
         state.cars = action.payload;
