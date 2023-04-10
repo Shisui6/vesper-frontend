@@ -13,6 +13,7 @@ import Login from './components/Login/Login';
 import ErrorPage from './error-page';
 import './index.css';
 import Cars from './components/Cars/Cars';
+import AddCar from './components/Cars/AddCar';
 import Register from './components/Register/Register';
 
 const router = createBrowserRouter([
@@ -38,6 +39,13 @@ const router = createBrowserRouter([
         element:
   <RequireAuth loginPath="/login">
     <Cars />
+  </RequireAuth>,
+      },
+      {
+        path: 'addcar',
+        element:
+  <RequireAuth loginPath="/login">
+    <AddCar />
   </RequireAuth>,
       },
     ],
