@@ -15,6 +15,7 @@ import './index.css';
 import Cars from './components/Cars/Cars';
 import AddCar from './components/Cars/AddCar';
 import Register from './components/Register/Register';
+import DetailsCarScreen from './components/Details/carsDetails';
 
 const router = createBrowserRouter([
   {
@@ -46,6 +47,13 @@ const router = createBrowserRouter([
         element:
   <RequireAuth loginPath="/login">
     <AddCar />
+  </RequireAuth>,
+      },
+      {
+        path: 'cars/:id',
+        element:
+  <RequireAuth loginPath="/login">
+    <DetailsCarScreen />
   </RequireAuth>,
       },
     ],

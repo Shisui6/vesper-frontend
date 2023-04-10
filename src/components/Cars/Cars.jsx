@@ -80,7 +80,7 @@ const Cars = () => {
                   </p>
                   <div className="mt-4 flex justify-center gap-4 text-gray-400">
                     <Link
-                      to="/"
+                      to={`/cars/${car.id}`}
                       className="w-5 h-5 duration-150 hover:text-gray-500"
                     >
                       <UilBookOpen />
