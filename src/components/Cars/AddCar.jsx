@@ -24,7 +24,8 @@ function AddCar() {
     setInfo({ ...info, [name]: value });
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     setError('');
 
     try {
