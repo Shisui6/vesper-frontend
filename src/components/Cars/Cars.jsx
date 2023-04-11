@@ -40,7 +40,7 @@ const Cars = () => {
           </div>
           <div className="mt-24 flex justify-center items-center flex-col">
             <img src="/empty.png" alt="empty" className="w-24 h-24 mb-5" />
-            <h2>No cars saved. Add a car to see it here</h2>
+            <h2>Our garage is currently empty. Please check back later</h2>
           </div>
         </div>
       </section>
@@ -66,7 +66,7 @@ const Cars = () => {
               <li key={car.id}>
                 <div className="w-40 h-40 mx-auto">
                   <img
-                    src={car.image}
+                    src={`/${car.image}`}
                     className="w-full h-full rounded-full"
                     alt=""
                   />

@@ -150,6 +150,7 @@ If you like this project please leave a star🤩
 ## 🙏 Acknowledgments <a name="acknowledgements"></a>
 
 - [Microverse](https://www.microverse.org/)
+- Original design by [Murat Korkmaz](https://www.behance.net/muratk) on behance
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
