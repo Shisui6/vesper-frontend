@@ -1,14 +1,14 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useAuthHeader } from 'react-auth-kit';
+import { useAuthHeader, useAuthUser } from 'react-auth-kit';
 import axios from 'axios';
 import { fetchCars, selectCars } from '../../redux/cars/cars';
 
 function DeleteCar() {
   const authHeader = useAuthHeader();
   const dispatch = useDispatch();
-  const userId = useSelector((state) => state.user.id);
+  const auth = useAuthUser();
   const cars = useSelector(selectCars);
-  const filteredCars = cars.filter((car) => car.user_id === userId);
+  const filteredCars = cars.filter((car) => car.user_id === auth().id);
 
   const handleDelete = async (id) => {
     await axios.delete(`http://localhost:3000/api/v1/cars/${id}`, {
