@@ -52,7 +52,7 @@ const Navbar = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="login" className="Navlink flex gap-2 p-3 mb-2 text-sm items-center cursor-pointer hover:text-white hover:bg-[#97bf0f] duration-100" style={({ isActive }) => (isActive ? { backgroundColor: '#97bf0f', color: '#fff' } : {})}>
+            <NavLink to="addCar" className="Navlink flex gap-2 p-3 mb-2 text-sm items-center cursor-pointer hover:text-white hover:bg-[#97bf0f] duration-100" style={({ isActive }) => (isActive ? { backgroundColor: '#97bf0f', color: '#fff' } : {})}>
               <UilPlusCircle />
             </NavLink>
           </li>
@@ -97,7 +97,7 @@ const Navbar = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="login" className="Navlink flex gap-2 p-3 rounded-xl mb-2 text-sm items-center cursor-pointer hover:text-white hover:bg-[#97bf0f] duration-100" style={({ isActive }) => (isActive ? { backgroundColor: '#97bf0f', color: '#fff' } : {})}>
+          <NavLink to="addCar" className="Navlink flex gap-2 p-3 rounded-xl mb-2 text-sm items-center cursor-pointer hover:text-white hover:bg-[#97bf0f] duration-100" style={({ isActive }) => (isActive ? { backgroundColor: '#97bf0f', color: '#fff' } : {})}>
             <UilPlusCircle />
             Add Car
           </NavLink>
