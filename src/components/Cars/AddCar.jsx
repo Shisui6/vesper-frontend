@@ -47,12 +47,11 @@ function AddCar() {
 
   return (
     <div className="flex-col pt-20 justify-center pr-6 h-screen">
-      <h1 className="text-center text-gray-800 text-3xl font-semibold sm:text-4xl">Add a Car</h1>
+      <h1 className="text-center text-gray-800 text-3xl font-semibold sm:text-4xl">
+        Add a Car
+      </h1>
       {error}
-      <form
-        onSubmit={handleSubmit}
-        className="justify-center"
-      >
+      <form onSubmit={handleSubmit} className="justify-center">
         <input
           type="text"
           name="name"
@@ -116,7 +115,13 @@ function AddCar() {
           onChange={changeHandler}
           value={info.price_per_day}
         />
-        <button type="submit" style={{ backgroundColor: '#97bf0f' }} className=" hover:bg-[#97bf0f] text-white font-bold py-2 px-4 rounded my-4 w-full">Add car</button>
+        <button
+          type="submit"
+          style={{ backgroundColor: '#97bf0f' }}
+          className=" hover:bg-[#97bf0f] text-white font-bold py-2 px-4 rounded my-4 w-full"
+        >
+          Add car
+        </button>
       </form>
     </div>
   );
