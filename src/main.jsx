@@ -13,6 +13,7 @@ import Cars from './components/Cars/Cars';
 import AddCar from './components/Cars/AddCar';
 import Register from './components/Register/Register';
 import DetailsCarScreen from './components/Details/carsDetails';
+import ReservationFormNav from './components/Reservation/reservationFormNav';
 import DeleteCar from './components/Cars/DeleteCar';
 
 const router = createBrowserRouter([
@@ -56,6 +57,13 @@ const router = createBrowserRouter([
             <DeleteCar />
           </RequireAuth>
         ),
+      },
+      {
+        path: 'reservations',
+        element:
+  <RequireAuth loginPath="/login">
+    <ReservationFormNav />
+  </RequireAuth>,
       },
       {
         path: 'cars/:id',

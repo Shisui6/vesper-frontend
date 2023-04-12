@@ -8,10 +8,10 @@ import {
   BsFillArrowLeftCircleFill,
 } from 'react-icons/bs';
 import { SlSettings } from 'react-icons/sl';
-
 import './details.css';
 import Loader from '../Loader/Loader';
 import { fetchCars } from '../../redux/cars/cars';
+import ReservationForm from '../Reservation/ReservationForm';
 
 const DetailsCarScreen = () => {
   const [loading, setLoading] = useState(true);
@@ -22,6 +22,11 @@ const DetailsCarScreen = () => {
   const carDetails = useSelector((state) => state.cars);
   const { cars } = carDetails;
   const carss = cars?.find((c) => c.id === parseInt(id, 10));
+
+  const [showReservationForm, setShowReservationForm] = useState(false);
+  const handleReservationClick = () => {
+    setShowReservationForm(true);
+  };
 
   useEffect(() => {
     dispatch(fetchCars(authHeader()));
@@ -113,6 +118,7 @@ const DetailsCarScreen = () => {
                 <button
                   type="button"
                   className="res-btn bg-lime-500 text-white hover:bg-lime-400 px-6 py-2 rounded-full font-semibold min-w-[10rem] transition-colors border-2 border-transparent"
+                  onClick={handleReservationClick}
                 >
                   <div className="flex items-center gap-3 justify-center">
                     <SlSettings />
@@ -124,6 +130,13 @@ const DetailsCarScreen = () => {
             </div>
           </div>
         </div>
+      )}
+      {showReservationForm && (
+      <ReservationForm
+        carId={carss.id}
+        carMake={carss.name}
+        year={carss.year}
+      />
       )}
       <div>
         <button

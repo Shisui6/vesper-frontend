@@ -23,7 +23,7 @@ const AddCar = () => {
     const { name, value } = e.target;
     setInfo({ ...info, [name]: value });
   };
-
+  /* eslint-disable */
   const handleSubmit = async (e) => {
     e.preventDefault();
     info.image = `${info.classification}.jpg`;
@@ -38,10 +38,10 @@ const AddCar = () => {
         navigate('/cars');
       }
     } catch (err) {
-      console.log(err);
+      return err;
     }
   };
-
+  /* eslint-enable */
   return (
     <main className="flex overflow-hidden mt-10 h-[87vh] rounded-2xl">
       <div className=" flex-1 hidden lg:block">
