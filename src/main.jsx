@@ -15,6 +15,7 @@ import './index.css';
 import Cars from './components/Cars/Cars';
 import Register from './components/Register/Register';
 import DetailsCarScreen from './components/Details/carsDetails';
+import ReservationFormNav from './components/Reservation/reservationFormNav';
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,13 @@ const router = createBrowserRouter([
         element:
   <RequireAuth loginPath="/login">
     <Cars />
+  </RequireAuth>,
+      },
+      {
+        path: 'reservations',
+        element:
+  <RequireAuth loginPath="/login">
+    <ReservationFormNav />
   </RequireAuth>,
       },
       {
