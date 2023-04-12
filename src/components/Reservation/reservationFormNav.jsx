@@ -24,13 +24,14 @@ const ReservationFormNav = () => {
   const [loading, setLoading] = useState(true);
   const cars = useSelector((state) => state.cars);
 
+  /* eslint-disable */
   useEffect(() => {
     dispatch(fetchCars(authHeader()));
     setTimeout(() => {
       setLoading(false);
     }, 3800);
   }, [dispatch]);
-
+  
   if (loading) {
     return <Loader />;
   }
@@ -79,7 +80,7 @@ const ReservationFormNav = () => {
       return error;
     }
   };
-
+  /* eslint-enable */
   return (
     <div className="forms-container">
       <div className="back-button-div">

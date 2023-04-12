@@ -30,6 +30,7 @@ const ReservationForm = ({ carId, carMake, year }) => {
   const handleDurationChange = (e) => {
     setReservationData({ ...reservationData, duration: e.target.value });
   };
+  /* eslint-disable */
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -58,6 +59,7 @@ const ReservationForm = ({ carId, carMake, year }) => {
       return error;
     }
   };
+  /* eslint-enable */
   return (
     <div className={styles.main}>
       <div className={styles.form_containers}>

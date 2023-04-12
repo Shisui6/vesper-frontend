@@ -119,6 +119,7 @@ const DetailsCarScreen = () => {
                   type="button"
                   className="res-btn bg-lime-500 text-white hover:bg-lime-400 px-6 py-2 rounded-full font-semibold min-w-[10rem] transition-colors border-2 border-transparent"
                   onClick={handleReservationClick}
+                >
                   <div className="flex items-center gap-3 justify-center">
                     <SlSettings />
                     <span>Reserve</span>
@@ -130,7 +131,13 @@ const DetailsCarScreen = () => {
           </div>
         </div>
       )}
-      {showReservationForm && <ReservationForm carId={carss.id} carMake={carss.name} year={carss.year} />}
+      {showReservationForm && (
+      <ReservationForm
+        carId={carss.id}
+        carMake={carss.name}
+        year={carss.year}
+      />
+      )}
       <div>
         <button
           className="fixed text-[1.8rem]
