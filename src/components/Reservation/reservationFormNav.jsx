@@ -81,7 +81,6 @@ const ReservationFormNav = () => {
     }
   };
   /* eslint-enable */
-  console.log(cars.cars.length);
   return (
     <>
       {cars.cars.length === 0 ? (
