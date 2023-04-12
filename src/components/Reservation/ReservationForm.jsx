@@ -59,14 +59,14 @@ const ReservationForm = ({ carId, carMake, year }) => {
       return error;
     }
   };
-  /* eslint-enable */
+ 
   return (
     <div className={styles.main}>
       <div className={styles.form_containers}>
         <div className={styles.back_button_div}>
-          <button type="button" className={styles.back_button} onClick={() => navigate(-1)}>
+          <span type="button" className={styles.back_button} onClick={() => navigate(-1)}>
             <BsFillArrowLeftCircleFill />
-          </button>
+          </span>
         </div>
         <div className={styles.form_wrapper_container}>
           <form onSubmit={handleSubmit} className={styles.formss}>
@@ -145,7 +145,7 @@ const ReservationForm = ({ carId, carMake, year }) => {
     </div>
   );
 };
-
+ /* eslint-enable */
 ReservationForm.propTypes = {
   carId: PropTypes.number.isRequired,
   carMake: PropTypes.string.isRequired,

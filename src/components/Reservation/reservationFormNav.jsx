@@ -81,88 +81,98 @@ const ReservationFormNav = () => {
     }
   };
   /* eslint-enable */
+  console.log(cars.cars.length);
   return (
-    <div className="forms-container">
-      <div className="back-button-div">
-        <button type="button" className="back-button" onClick={() => navigate(-1)}>
-          <BsFillArrowLeftCircleFill />
-        </button>
-      </div>
-      <div className="form-wrapper-container">
-        <form onSubmit={handleSubmit} className="forms">
-          <h2 className="headers-title">Reserve a car</h2>
-          <div className="lines" />
-          <p className="infos">
-            There are 34 different versions of the Vespa. Today five series are in production:
-            the classic manual transmission PX and the modern CVT transmission S, LX, GT, and GTS.
-            We have showrooms all over the globe which some include test-riding facilities.
-            If you wish to find out if a
-            test-ride, please make reservation.
-          </p>
-          <div className="input-wrapper">
-            <input
-              type="text"
-              id="username"
-              name="username"
-              value={auth().username}
-              readOnly
-              className="form-input"
-              placeholder="Username"
-            />
+    <>
+      {cars.cars.length === 0 ? (
+        <h1 className="no-cars-page">No cars available to reserve!!</h1>
+      ) : (
+
+        <div className="forms-container">
+          <div className="back-button-div">
+            <button type="button" className="back-button" onClick={() => navigate(-1)}>
+              <BsFillArrowLeftCircleFill />
+            </button>
           </div>
-          <div className="input-wrapper">
-            <select
-              id="car"
-              name="car"
-              onChange={handleCarChange}
-              required
-              className="select-fom"
-            >
-              <option value="">Select a car</option>
-              {Array.from(cars.cars).map((car) => (
-                <option value={car.id} key={car.id}>
-                  {car.name}
-                  {' '}
-                  {car.model}
-                </option>
-              ))}
-            </select>
+          <div className="form-wrapper-container">
+            <form onSubmit={handleSubmit} className="forms">
+              <h2 className="headers-title">Reserve a car</h2>
+              <div className="lines" />
+              <p className="infos">
+                There are 34 different versions of the Vespa. Today five series are in
+                production: the classic manual transmission PX and the modern CVT
+                transmission S, LX, GT, and GTS.
+                We have showrooms all over the globe which some include
+                test-riding facilities.
+                If you wish to find out if a
+                test-ride, please make reservation.
+              </p>
+              <div className="input-wrapper">
+                <input
+                  type="text"
+                  id="username"
+                  name="username"
+                  value={auth().username}
+                  readOnly
+                  className="form-input"
+                  placeholder="Username"
+                />
+              </div>
+              <div className="input-wrapper">
+                <select
+                  id="car"
+                  name="car"
+                  onChange={handleCarChange}
+                  required
+                  className="select-fom"
+                >
+                  <option value="">Select a car</option>
+                  {Array.from(cars.cars).map((car) => (
+                    <option value={car.id} key={car.id}>
+                      {car.name}
+                      {' '}
+                      {car.model}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="input-wrapper">
+                <input
+                  type="date"
+                  id="date"
+                  name="date"
+                  onChange={handleDateChange}
+                  className="form-input"
+                  placeholder="Date"
+                />
+              </div>
+              <div className="input-wrapper">
+                <input
+                  type="text"
+                  id="city"
+                  name="city"
+                  onChange={handleCityChange}
+                  className="form-input"
+                  placeholder="City"
+                />
+              </div>
+              <div className="input-wrapper">
+                <input
+                  type="number"
+                  id="duration"
+                  name="duration"
+                  onChange={handleDurationChange}
+                  required
+                  className="form-input"
+                  placeholder="Duration"
+                />
+              </div>
+              <button type="submit" className="form-submit" onClick={() => navigate(-1)}><div className="text-res">Reserve</div></button>
+            </form>
           </div>
-          <div className="input-wrapper">
-            <input
-              type="date"
-              id="date"
-              name="date"
-              onChange={handleDateChange}
-              className="form-input"
-              placeholder="Date"
-            />
-          </div>
-          <div className="input-wrapper">
-            <input
-              type="text"
-              id="city"
-              name="city"
-              onChange={handleCityChange}
-              className="form-input"
-              placeholder="City"
-            />
-          </div>
-          <div className="input-wrapper">
-            <input
-              type="number"
-              id="duration"
-              name="duration"
-              onChange={handleDurationChange}
-              required
-              className="form-input"
-              placeholder="Duration"
-            />
-          </div>
-          <button type="submit" className="form-submit" onClick={() => navigate(-1)}><div className="text-res">Reserve</div></button>
-        </form>
-      </div>
-    </div>
+        </div>
+      )}
+    </>
   );
 };
 
