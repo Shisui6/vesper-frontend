@@ -90,7 +90,7 @@ const ReservationFormNav = () => {
 
         <div className="forms-container">
           <div className="back-button-div">
-            <button type="button" className="back-button" onClick={() => navigate(-1)}>
+            <button type="button" className="back-button" id="back-arrow" onClick={() => navigate(-1)}>
               <BsFillArrowLeftCircleFill />
             </button>
           </div>
