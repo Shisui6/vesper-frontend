@@ -33,6 +33,7 @@ export const carsSlice = createSlice({
 });
 
 export const selectCars = (state) => state.cars.cars;
+
 export const selectIsLoading = (state) => state.countries.isLoading;
 
 export default carsSlice.reducer;

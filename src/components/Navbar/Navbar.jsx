@@ -57,7 +57,7 @@ const Navbar = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="login" className="Navlink flex gap-2 p-3 mb-2 text-sm items-center cursor-pointer hover:text-white hover:bg-[#97bf0f] duration-100" style={({ isActive }) => (isActive ? { backgroundColor: '#97bf0f', color: '#fff' } : {})}>
+            <NavLink to="deleteCar" className="Navlink flex gap-2 p-3 mb-2 text-sm items-center cursor-pointer hover:text-white hover:bg-[#97bf0f] duration-100" style={({ isActive }) => (isActive ? { backgroundColor: '#97bf0f', color: '#fff' } : {})}>
               <UilTrashAlt />
             </NavLink>
           </li>
@@ -72,7 +72,7 @@ const Navbar = () => {
   }
 
   return (
-    <nav className="Navbar fixed left-0 h-screen w-52 shadow-lg flex flex-col justify-between py-10 px-4 fade-in">
+    <nav className="Navbar fixed left-0 top-0 bottom-0 h-screen w-52 shadow-lg flex flex-col justify-between py-10 px-4 fade-in">
       <div className="flex items-center justify-between">
         <h2 className=" font-extrabold tracking-wide text-2xl">Vesper</h2>
         <img src="/profile.png" alt="profile" className=" w-10 h-10" />
@@ -103,7 +103,7 @@ const Navbar = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="login" className="Navlink flex gap-2 p-3 rounded-xl mb-2 text-sm items-center cursor-pointer hover:text-white hover:bg-[#97bf0f] duration-100" style={({ isActive }) => (isActive ? { backgroundColor: '#97bf0f', color: '#fff' } : {})}>
+          <NavLink to="deleteCar" className="Navlink flex gap-2 p-3 rounded-xl mb-2 text-sm items-center cursor-pointer hover:text-white hover:bg-[#97bf0f] duration-100" style={({ isActive }) => (isActive ? { backgroundColor: '#97bf0f', color: '#fff' } : {})}>
             <UilTrashAlt />
             Delete Car
           </NavLink>

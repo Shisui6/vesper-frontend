@@ -52,7 +52,7 @@ const DetailsCarScreen = () => {
         <div className="flex flex-col items-center md:justify-start justify-center w-full md:flex-row grow h-full lg:pt-20 lg:pb-10">
           <div className="grow  md:w-5/6 flex items-center justify-center md:px-10 rounded-full aspect-square">
             <img
-              src={carss?.image}
+              src={`/${carss?.image}`}
               alt={carss?.name}
               className="object-cover block rounded-full m-4 aspect-square w-[100%] md:ml-[40%]"
             />
@@ -73,7 +73,7 @@ const DetailsCarScreen = () => {
                 </div>
                 <ul className="grow-0 p-4">
                   <li className="odd:bg-gray-200 bg-gray-100 py-2 px-4">
-                    <div className="flex items-center justify-center">
+                    <div className="flex items-center justify-between">
                       <span className="pr-10">Model</span>
                       <span className="text-right">
                         {carss?.model}
@@ -81,19 +81,25 @@ const DetailsCarScreen = () => {
                     </div>
                   </li>
                   <li className="odd:bg-gray-200 bg-gray-100 py-2 px-4">
-                    <div className="flex items-center justify-center">
+                    <div className="flex items-center justify-between">
                       <span className="pr-10">Year</span>
                       <span className="text-right">{carss?.year}</span>
                     </div>
                   </li>
                   <li className="odd:bg-gray-200 bg-gray-100 py-2 px-4">
-                    <div className="flex items-center justify-center">
+                    <div className="flex items-center justify-between">
                       <span className="pr-10">Rent per day</span>
                       <span className="text-right">
-                        {carss?.price_per_day}
-                        {' '}
                         $
+                        {' '}
+                        {carss?.price_per_day}
                       </span>
+                    </div>
+                  </li>
+                  <li className="odd:bg-gray-200 bg-gray-100 py-2 px-4">
+                    <div className="flex items-center justify-between">
+                      <span className="pr-10">Owner</span>
+                      <span className="text-right">{carss?.owner}</span>
                     </div>
                   </li>
                 </ul>
@@ -103,10 +109,10 @@ const DetailsCarScreen = () => {
                 {' '}
                 <AiOutlineRight className="text-yellow-500" />
               </p>
-              <div className="my-6 flex justify-center">
+              <div className="mt-6 flex justify-center">
                 <button
                   type="button"
-                  className="res-btn bg-lime-500 text-white hover:bg-lime-400 px-6 py-2 rounded-full font-semibold min-w-[10rem] transition-colors border-2 border-transparent mb-4"
+                  className="res-btn bg-lime-500 text-white hover:bg-lime-400 px-6 py-2 rounded-full font-semibold min-w-[10rem] transition-colors border-2 border-transparent"
                 >
                   <div className="flex items-center gap-3 justify-center">
                     <SlSettings />

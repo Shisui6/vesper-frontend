@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 import { useAuthHeader, useAuthUser } from 'react-auth-kit';
+import img from '../../images/new-car.jpg';
 
-function AddCar() {
+const AddCar = () => {
   const auth = useAuthUser();
   const [info, setInfo] = useState({
     name: '',
@@ -15,7 +16,6 @@ function AddCar() {
     price_per_day: '',
     user_id: auth().id,
   });
-  const [error, setError] = useState('');
   const navigate = useNavigate();
   const authHeader = useAuthHeader();
 
@@ -26,8 +26,8 @@ function AddCar() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
-
+    info.image = `${info.classification}.jpg`;
+    info.owner = auth().username;
     try {
       const res = await axios.post('http://localhost:3000/api/v1/cars', info, {
         headers: {
@@ -38,89 +38,102 @@ function AddCar() {
         navigate('/cars');
       }
     } catch (err) {
-      if (err && err instanceof AxiosError) {
-        setError(err.response.data.error);
-      } else {
-        setError(err.message);
-      }
+      console.log(err);
     }
   };
 
   return (
-    <div className="flex-col pt-20 justify-center pr-6 h-screen">
-      <h1 className="text-center text-gray-800 text-3xl font-semibold sm:text-4xl">Add a Car</h1>
-      {error}
-      <form
-        onSubmit={handleSubmit}
-        className="justify-center"
-      >
-        <input
-          type="text"
-          name="name"
-          placeholder="name"
-          className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
-          required
-          onChange={changeHandler}
-          value={info.name}
-        />
-        <input
-          type="text"
-          name="description"
-          placeholder="description"
-          className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
-          required
-          onChange={changeHandler}
-          value={info.description}
-        />
-        <input
-          type="text"
-          name="image"
-          placeholder="image"
-          className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
-          required
-          onChange={changeHandler}
-          value={info.image}
-        />
-        <input
-          type="text"
-          name="classification"
-          placeholder="type"
-          className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
-          required
-          onChange={changeHandler}
-          value={info.classification}
-        />
-        <input
-          type="text"
-          name="model"
-          placeholder="model"
-          className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
-          required
-          onChange={changeHandler}
-          value={info.model}
-        />
-        <input
-          type="text"
-          name="year"
-          placeholder="year"
-          className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
-          required
-          onChange={changeHandler}
-          value={info.year}
-        />
-        <input
-          type="text"
-          name="price_per_day"
-          placeholder="price_per_day"
-          className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
-          required
-          onChange={changeHandler}
-          value={info.price_per_day}
-        />
-        <button type="submit" style={{ backgroundColor: '#97bf0f' }} className=" hover:bg-[#97bf0f] text-white font-bold py-2 px-4 rounded my-4 w-full">Add car</button>
-      </form>
-    </div>
+    <main className="flex overflow-hidden mt-10 h-[87vh] rounded-2xl">
+      <div className=" flex-1 hidden lg:block">
+        <img src={img} className="w-full h-screen object-cover" alt="car" />
+      </div>
+      <div className="pt-5 flex-1 lg:flex lg:justify-center lg:h-screen lg:overflow-auto">
+        <div className="max-w-lg flex-1 mx-auto px-4 text-gray-600">
+          <div>
+            <h3 className="text-gray-800 text-3xl font-semibold sm:text-4xl">
+              New Car
+            </h3>
+          </div>
+          <form
+            onSubmit={handleSubmit}
+            className="space-y-5 mt-6 lg:pb-12"
+          >
+            <div>
+              <input
+                type="text"
+                name="name"
+                placeholder="Name"
+                onChange={changeHandler}
+                required
+                className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-gray-800 shadow-sm rounded-lg"
+              />
+            </div>
+            <div>
+              <input
+                type="text"
+                name="description"
+                required
+                placeholder="Description"
+                onChange={changeHandler}
+                className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-gray-800 shadow-sm rounded-lg"
+              />
+            </div>
+            <div>
+              <select className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-gray-800 shadow-sm rounded-lg" required onChange={changeHandler} name="classification" defaultValue="">
+                <option value="" disabled>Select a type</option>
+                <option value="suv">SUV</option>
+                <option value="electric">Electric</option>
+                <option value="hatchback">Hatchback</option>
+                <option value="convertible">Convertible</option>
+                <option value="coupe">Coupe</option>
+                <option value="sedan">Sedan</option>
+                <option value="sports">Sports Car</option>
+                <option value="minivan">Minivan</option>
+                <option value="pickup">Pickup Truck</option>
+                <option value="wagon">Station Wagon</option>
+              </select>
+            </div>
+            <div>
+              <input
+                type="text"
+                name="model"
+                required
+                placeholder="Model"
+                onChange={changeHandler}
+                className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-gray-800 shadow-sm rounded-lg"
+              />
+            </div>
+            <div>
+              <input
+                type="number"
+                name="year"
+                required
+                onChange={changeHandler}
+                placeholder="Which year was it made. E.g 2021"
+                className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-gray-800 shadow-sm rounded-lg"
+              />
+            </div>
+            <div>
+              <input
+                type="number"
+                name="price_per_day"
+                required
+                onChange={changeHandler}
+                placeholder="Price per day"
+                className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-gray-800 shadow-sm rounded-lg"
+              />
+            </div>
+            <button
+              type="submit"
+              className="w-full px-4 py-2 text-white font-medium bg-gray-800 hover:bg-gray-700 active:bg-gray-900 rounded-lg duration-150"
+            >
+              Submit
+            </button>
+          </form>
+        </div>
+      </div>
+    </main>
   );
-}
+};
 
 export default AddCar;
