@@ -56,7 +56,7 @@ const ReservationFormNav = () => {
     reservationData.car_id = reservationData.car_id.split(',');
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3000/api/v1/reservations', {
+      const response = await axios.post('https://vesper-backend.onrender.com/api/v1/reservations', {
         reservation: {
           date: reservationData.date,
           car_name: reservationData.car_id[1],

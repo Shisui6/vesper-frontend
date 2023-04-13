@@ -23,7 +23,7 @@ const DeleteCar = () => {
   }, [authentication, dispatch]);
 
   const handleDelete = async (id) => {
-    await axios.delete(`http://localhost:3000/api/v1/cars/${id}`, {
+    await axios.delete(`https://vesper-backend.onrender.com/api/v1/cars/${id}`, {
       headers: {
         Authorization: authHeader(),
       },

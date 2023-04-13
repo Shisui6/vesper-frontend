@@ -28,7 +28,7 @@ const AddCar = () => {
     info.image = `${info.classification}.jpg`;
     info.owner = auth().username;
     try {
-      const res = await axios.post('http://localhost:3000/api/v1/cars', { car: info }, {
+      const res = await axios.post('https://vesper-backend.onrender.com/api/v1/cars', { car: info }, {
         headers: {
           Authorization: authHeader(),
         },

@@ -10,7 +10,7 @@ const initialState = {
 export const fetchCars = createAsyncThunk(
   'cars/fetchCars',
   async (data) => {
-    const response = await fetch('http://localhost:3000/api/v1/cars', {
+    const response = await fetch('https://vesper-backend.onrender.com/api/v1/cars', {
       headers: {
         Authorization: data,
       },

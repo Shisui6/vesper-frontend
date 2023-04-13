@@ -22,7 +22,7 @@ const ReservedCars = () => {
       },
     };
 
-    axios.get('http://localhost:3000/api/v1/reservations', config)
+    axios.get('https://vesper-backend.onrender.com/api/v1/reservations', config)
       .then((response) => setReservedCars(response.data.reservations))
       .catch((error) => error);
 

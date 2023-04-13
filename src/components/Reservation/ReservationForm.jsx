@@ -34,7 +34,7 @@ const ReservationForm = ({ carId, carMake, year }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3000/api/v1/reservations', {
+      const response = await axios.post('https://vesper-backend.onrender.com/api/v1/reservations', {
         reservation: {
           date: reservationData.date,
           car_name: carMake,
