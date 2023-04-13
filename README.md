@@ -58,9 +58,17 @@
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## 🎨 Link to Backend <a name="key-features"></a>
+## 🪵 Link to Backend <a name="key-features"></a>
 
-- [Frontend](https://github.com/Shisui6/vesper-backend)
+- [Backend](https://github.com/Shisui6/vesper-backend)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## 🛹 Kanban Board <a name="key-features"></a>
+
+- Kanban board link: [link](https://github.com/users/Shisui6/projects/1)
+- No of team members: 4
+<img width="960" alt="image" src="https://user-images.githubusercontent.com/37116322/229125297-dc1b0187-e3b0-4c52-a8f4-4f01c143cf6c.png">
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
