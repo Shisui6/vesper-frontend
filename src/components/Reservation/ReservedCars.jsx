@@ -7,16 +7,18 @@ import Loader from '../Loader/Loader';
 const ReservedCars = () => {
   const [reservedCars, setReservedCars] = useState([]);
   const authHeader = useAuthHeader();
+  const authentication = authHeader();
   const auth = useAuthUser();
+  const authData = auth();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const config = {
       headers: {
-        Authorization: authHeader(),
+        Authorization: authentication,
       },
       params: {
-        id: auth().id,
+        id: authData.id,
       },
     };
 
@@ -27,7 +29,7 @@ const ReservedCars = () => {
     setTimeout(() => {
       setLoading(false);
     }, 2500);
-  }, []);
+  }, [authData.id, authentication]);
 
   if (loading) {
     return <Loader speed={2} />;

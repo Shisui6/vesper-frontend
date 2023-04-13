@@ -10,15 +10,16 @@ const Cars = () => {
   const [loading, setLoading] = useState(true);
   const auth = useAuthUser();
   const authHeader = useAuthHeader();
+  const authentication = authHeader();
   const dispatch = useDispatch();
   const cars = useSelector(selectCars);
 
   useEffect(() => {
-    dispatch(fetchCars(authHeader()));
+    dispatch(fetchCars(authentication));
     setTimeout(() => {
       setLoading(false);
     }, 3800);
-  }, [dispatch]);
+  }, [authentication, dispatch]);
 
   if (loading) {
     return <Loader speed={1.5} />;

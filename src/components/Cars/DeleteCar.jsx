@@ -8,6 +8,7 @@ import Loader from '../Loader/Loader';
 
 const DeleteCar = () => {
   const authHeader = useAuthHeader();
+  const authentication = authHeader();
   const dispatch = useDispatch();
   const auth = useAuthUser();
   const cars = useSelector(selectCars);
@@ -15,11 +16,11 @@ const DeleteCar = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    dispatch(fetchCars(authHeader()));
+    dispatch(fetchCars(authentication));
     setTimeout(() => {
       setLoading(false);
     }, 2500);
-  }, [dispatch]);
+  }, [authentication, dispatch]);
 
   const handleDelete = async (id) => {
     await axios.delete(`http://localhost:3000/api/v1/cars/${id}`, {

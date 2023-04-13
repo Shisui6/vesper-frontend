@@ -40,7 +40,7 @@ export const carsSlice = createSlice({
 export const { setNotice } = carsSlice.actions;
 
 export const selectCars = (state) => state.cars.cars;
-export const selectIsLoading = (state) => state.countries.isLoading;
-export const selectNotice = (state) => state.user.notice;
+export const selectIsLoading = (state) => state.cars.isLoading;
+export const selectNotice = (state) => state.cars.notice;
 
 export default carsSlice.reducer;

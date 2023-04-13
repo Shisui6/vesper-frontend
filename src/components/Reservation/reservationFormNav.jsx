@@ -21,15 +21,16 @@ const ReservationFormNav = () => {
   const navigate = useNavigate();
   const auth = useAuthUser();
   const authHeader = useAuthHeader();
+  const authentication = authHeader();
   const [loading, setLoading] = useState(true);
   const cars = useSelector((state) => state.cars);
 
   useEffect(() => {
-    dispatch(fetchCars(authHeader()));
+    dispatch(fetchCars(authentication));
     setTimeout(() => {
       setLoading(false);
     }, 2500);
-  }, [dispatch]);
+  }, [authentication, dispatch]);
 
   if (loading) {
     return <Loader speed={2} />;
