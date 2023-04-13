@@ -93,7 +93,7 @@
   outline: none;
 }
 
-.form_containers button {
+.form_submit {
   width: 25%;
   padding: 0.5rem;
   margin-top: 1rem;

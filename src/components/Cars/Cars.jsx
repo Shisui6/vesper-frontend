@@ -21,7 +21,7 @@ const Cars = () => {
   }, [dispatch]);
 
   if (loading) {
-    return <Loader />;
+    return <Loader speed={1.5} />;
   }
 
   if (cars.length === 0) {

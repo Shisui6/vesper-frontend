@@ -1,9 +1,10 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAuthHeader, useAuthUser } from 'react-auth-kit';
 import axios from 'axios';
 import { UilTrashAlt } from '@iconscout/react-unicons';
 import { fetchCars, selectCars } from '../../redux/cars/cars';
+import Loader from '../Loader/Loader';
 
 const DeleteCar = () => {
   const authHeader = useAuthHeader();
@@ -11,9 +12,13 @@ const DeleteCar = () => {
   const auth = useAuthUser();
   const cars = useSelector(selectCars);
   const filteredCars = cars.filter((car) => car.user_id === auth().id);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     dispatch(fetchCars(authHeader()));
+    setTimeout(() => {
+      setLoading(false);
+    }, 2500);
   }, [dispatch]);
 
   const handleDelete = async (id) => {
@@ -24,6 +29,10 @@ const DeleteCar = () => {
     });
     dispatch(fetchCars(authHeader()));
   };
+
+  if (loading) {
+    return <Loader speed={2} />;
+  }
 
   if (filteredCars.length === 0) {
     return (

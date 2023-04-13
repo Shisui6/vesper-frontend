@@ -4,7 +4,7 @@ import axios, { AxiosError } from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { UilPrevious, UilSignInAlt } from '@iconscout/react-unicons';
 import { useDispatch } from 'react-redux';
-import { setNotice } from '../../redux/user/user';
+import { setNotice } from '../../redux/cars/cars';
 
 const Login = () => {
   const [error, setError] = useState('');
@@ -17,7 +17,7 @@ const Login = () => {
     try {
       const response = await axios.post(
         'http://localhost:3000/users',
-        values,
+        { user: values },
       );
       if (response.status === 201) {
         dispatch(setNotice('Account created successfully!'));

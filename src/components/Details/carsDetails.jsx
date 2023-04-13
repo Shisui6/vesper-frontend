@@ -32,11 +32,11 @@ const DetailsCarScreen = () => {
     dispatch(fetchCars(authHeader()));
     setTimeout(() => {
       setLoading(false);
-    }, 3800);
+    }, 2500);
   }, [dispatch]);
 
   if (loading) {
-    return <Loader />;
+    return <Loader speed={2} />;
   }
 
   if (!cars) {

@@ -28,11 +28,11 @@ const ReservationFormNav = () => {
     dispatch(fetchCars(authHeader()));
     setTimeout(() => {
       setLoading(false);
-    }, 3800);
+    }, 2500);
   }, [dispatch]);
 
   if (loading) {
-    return <Loader />;
+    return <Loader speed={2} />;
   }
 
   const handleCarChange = (e) => {
@@ -52,19 +52,27 @@ const ReservationFormNav = () => {
   };
 
   const handleSubmit = async (e) => {
+    reservationData.car_id = reservationData.car_id.split(',');
     e.preventDefault();
     try {
-      await axios.post('http://localhost:3000/api/v1/reservations', {
-        date: reservationData.date,
-        city: reservationData.city,
-        duration: parseInt(reservationData.duration, 10),
-        user_id: auth().id,
-        car_id: parseInt(reservationData.car_id, 10),
+      const response = await axios.post('http://localhost:3000/api/v1/reservations', {
+        reservation: {
+          date: reservationData.date,
+          car_name: reservationData.car_id[1],
+          city: reservationData.city,
+          duration: parseInt(reservationData.duration, 10),
+          user_id: auth().id,
+          car_id: reservationData.car_id[0],
+        },
       }, {
         headers: {
           Authorization: authHeader(),
         },
       });
+
+      if (response.status === 201) {
+        navigate('/reserved');
+      }
 
       setReservationData({
         date: '',
@@ -72,10 +80,10 @@ const ReservationFormNav = () => {
         duration: '',
       });
     } catch (error) {
-      console.log(error);
+      throw new Error(error);
     }
   };
-  /* eslint-enable */
+
   return (
     <>
       {cars.cars.length === 0 ? (
@@ -93,7 +101,7 @@ const ReservationFormNav = () => {
               <h2 className="headers-title">Reserve a car</h2>
               <div className="lines" />
               <p className="infos">
-                There are 34 different versions of the Vespa. Today five series are in
+                There are 34 different versions of the Vesper. Today five series are in
                 production: the classic manual transmission PX and the modern CVT
                 transmission S, LX, GT, and GTS.
                 We have showrooms all over the globe which some include
@@ -122,7 +130,7 @@ const ReservationFormNav = () => {
                 >
                   <option value="">Select a car</option>
                   {Array.from(cars.cars).map((car) => (
-                    <option value={car.id} key={car.id}>
+                    <option value={[car.id, car.name]} key={car.id}>
                       {car.name}
                       {' '}
                       {car.model}
@@ -161,7 +169,7 @@ const ReservationFormNav = () => {
                   placeholder="Duration in days"
                 />
               </div>
-              <button type="submit" className="form-submit" onClick={() => navigate(-1)}><div className="text-res">Reserve</div></button>
+              <button type="submit" className="form-submit"><div className="text-res">Reserve</div></button>
             </form>
           </div>
         </div>
