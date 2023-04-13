@@ -17,6 +17,7 @@ const DetailsCarScreen = () => {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
   const authHeader = useAuthHeader();
+  const authentication = authHeader();
   const { id } = useParams();
   const navigate = useNavigate();
   const carDetails = useSelector((state) => state.cars);
@@ -29,14 +30,14 @@ const DetailsCarScreen = () => {
   };
 
   useEffect(() => {
-    dispatch(fetchCars(authHeader()));
+    dispatch(fetchCars(authentication));
     setTimeout(() => {
       setLoading(false);
-    }, 3800);
-  }, [dispatch]);
+    }, 2500);
+  }, [authentication, dispatch]);
 
   if (loading) {
-    return <Loader />;
+    return <Loader speed={2} />;
   }
 
   if (!cars) {

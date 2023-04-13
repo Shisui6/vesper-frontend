@@ -4,13 +4,12 @@ import { useFormik } from 'formik';
 import axios, { AxiosError } from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { UilPrevious, UilRegistered } from '@iconscout/react-unicons';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectNotice, setUsername, setId } from '../../redux/user/user';
+import { useSelector } from 'react-redux';
+import { selectNotice } from '../../redux/cars/cars';
 
 const Login = () => {
   const [error, setError] = useState('');
   const notice = useSelector(selectNotice);
-  const dispatch = useDispatch();
   const signIn = useSignIn();
   const navigate = useNavigate();
 
@@ -34,8 +33,6 @@ const Login = () => {
       });
 
       setTimeout(() => {
-        dispatch(setUsername(response.data.user.username));
-        dispatch(setId(response.data.user.id));
         navigate('/cars');
       }, 500);
     } catch (err) {

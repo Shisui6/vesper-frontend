@@ -14,6 +14,7 @@ import AddCar from './components/Cars/AddCar';
 import Register from './components/Register/Register';
 import DetailsCarScreen from './components/Details/carsDetails';
 import ReservationFormNav from './components/Reservation/reservationFormNav';
+import ReservedCars from './components/Reservation/ReservedCars';
 import DeleteCar from './components/Cars/DeleteCar';
 
 const router = createBrowserRouter([
@@ -63,6 +64,13 @@ const router = createBrowserRouter([
         element:
   <RequireAuth loginPath="/login">
     <ReservationFormNav />
+  </RequireAuth>,
+      },
+      {
+        path: 'reserved',
+        element:
+  <RequireAuth loginPath="/login">
+    <ReservedCars />
   </RequireAuth>,
       },
       {

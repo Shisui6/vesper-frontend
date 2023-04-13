@@ -1,20 +1,26 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAuthHeader, useAuthUser } from 'react-auth-kit';
 import axios from 'axios';
 import { UilTrashAlt } from '@iconscout/react-unicons';
 import { fetchCars, selectCars } from '../../redux/cars/cars';
+import Loader from '../Loader/Loader';
 
 const DeleteCar = () => {
   const authHeader = useAuthHeader();
+  const authentication = authHeader();
   const dispatch = useDispatch();
   const auth = useAuthUser();
   const cars = useSelector(selectCars);
   const filteredCars = cars.filter((car) => car.user_id === auth().id);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    dispatch(fetchCars(authHeader()));
-  }, [dispatch]);
+    dispatch(fetchCars(authentication));
+    setTimeout(() => {
+      setLoading(false);
+    }, 2500);
+  }, [authentication, dispatch]);
 
   const handleDelete = async (id) => {
     await axios.delete(`http://localhost:3000/api/v1/cars/${id}`, {
@@ -24,6 +30,10 @@ const DeleteCar = () => {
     });
     dispatch(fetchCars(authHeader()));
   };
+
+  if (loading) {
+    return <Loader speed={2} />;
+  }
 
   if (filteredCars.length === 0) {
     return (

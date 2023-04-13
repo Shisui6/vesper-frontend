@@ -23,13 +23,12 @@ const AddCar = () => {
     const { name, value } = e.target;
     setInfo({ ...info, [name]: value });
   };
-  /* eslint-disable */
   const handleSubmit = async (e) => {
     e.preventDefault();
     info.image = `${info.classification}.jpg`;
     info.owner = auth().username;
     try {
-      const res = await axios.post('http://localhost:3000/api/v1/cars', info, {
+      const res = await axios.post('http://localhost:3000/api/v1/cars', { car: info }, {
         headers: {
           Authorization: authHeader(),
         },
@@ -38,10 +37,10 @@ const AddCar = () => {
         navigate('/cars');
       }
     } catch (err) {
-      return err;
+      throw new Error(err);
     }
   };
-  /* eslint-enable */
+
   return (
     <main className="flex overflow-hidden mt-10 h-[87vh] rounded-2xl">
       <div className=" flex-1 hidden lg:block">

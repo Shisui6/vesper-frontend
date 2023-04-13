@@ -30,24 +30,27 @@ const ReservationForm = ({ carId, carMake, year }) => {
   const handleDurationChange = (e) => {
     setReservationData({ ...reservationData, duration: e.target.value });
   };
-  /* eslint-disable */
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post('http://localhost:3000/api/v1/reservations', {
-        date: reservationData.date,
-        city: reservationData.city,
-        duration: parseInt(reservationData.duration, 10),
-        user_id: auth().id,
-        car_id: parseInt(reservationData.car_id, 10),
+        reservation: {
+          date: reservationData.date,
+          car_name: carMake,
+          city: reservationData.city,
+          duration: parseInt(reservationData.duration, 10),
+          user_id: auth().id,
+          car_id: reservationData.car_id,
+        },
       }, {
         headers: {
           Authorization: authHeader(),
         },
       });
 
-      if (!response.ok) {
-        throw new Error('Error creating reservation');
+      if (response.status === 201) {
+        navigate('/reserved');
       }
 
       setReservationData({
@@ -56,17 +59,17 @@ const ReservationForm = ({ carId, carMake, year }) => {
         duration: '',
       });
     } catch (error) {
-      return error;
+      throw new Error(error);
     }
   };
- 
+
   return (
     <div className={styles.main}>
       <div className={styles.form_containers}>
         <div className={styles.back_button_div}>
-          <span type="button" className={styles.back_button} onClick={() => navigate(-1)}>
+          <button type="button" className={styles.back_button} onClick={() => navigate(-1)}>
             <BsFillArrowLeftCircleFill />
-          </span>
+          </button>
         </div>
         <div className={styles.form_wrapper_container}>
           <form onSubmit={handleSubmit} className={styles.formss}>
@@ -81,7 +84,7 @@ const ReservationForm = ({ carId, carMake, year }) => {
             </h2>
             <div className={styles.line} />
             <p className={styles.info}>
-              There are 34 different versions of the Vespa. Today five series are in production:
+              There are 34 different versions of the Vesper. Today five series are in production:
               the classic manual transmission PX and the modern CVT transmission S, LX, GT, and GTS.
               We have showrooms all over the globe which some include test-riding facilities.
               If you wish to find out if a
@@ -135,17 +138,17 @@ const ReservationForm = ({ carId, carMake, year }) => {
                 onChange={handleDurationChange}
                 required
                 className={styles.form_inputs}
-                placeholder="Duration"
+                placeholder="Duration in days"
               />
             </div>
-            <button type="submit" className={styles.form_submit} onClick={() => navigate(-1)}><div className={styles.text_res}>Reserve</div></button>
+            <button type="submit" className={styles.form_submit}><div className={styles.text_res}>Reserve</div></button>
           </form>
         </div>
       </div>
     </div>
   );
 };
- /* eslint-enable */
+
 ReservationForm.propTypes = {
   carId: PropTypes.number.isRequired,
   carMake: PropTypes.string.isRequired,
