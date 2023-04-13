@@ -50,6 +50,20 @@
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+<!-- LIVE DEMO -->
+
+## 🚀 Live Demo <a name="live-demo"></a>
+
+- [Live Demo Link](https://vesper-4yj8.onrender.com)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## 🎨 Link to Backend <a name="key-features"></a>
+
+- [Frontend](https://github.com/Shisui6/vesper-backend)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 <!-- GETTING STARTED -->
 
 ## 💻 Getting Started <a name="getting-started"></a>
@@ -71,7 +85,7 @@ In order to run this project you need:
 Clone this repository to your desired folder:
 
 ```sh
-  git clone https://github.com/Shisui6/car-rental-front-end.git
+  git clone https://github.com/Shisui6/vesper-frontend.git
 ```
 
 ### Install
@@ -79,7 +93,7 @@ Clone this repository to your desired folder:
 Install this project with:
 
 ```sh
-  cd car-rental-front-end
+  cd vesper-frontend
   npm install
 ```
 
