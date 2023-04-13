@@ -24,14 +24,13 @@ const ReservationFormNav = () => {
   const [loading, setLoading] = useState(true);
   const cars = useSelector((state) => state.cars);
 
-  /* eslint-disable */
   useEffect(() => {
     dispatch(fetchCars(authHeader()));
     setTimeout(() => {
       setLoading(false);
     }, 3800);
   }, [dispatch]);
-  
+
   if (loading) {
     return <Loader />;
   }
@@ -55,7 +54,7 @@ const ReservationFormNav = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3000/api/v1/reservations', {
+      await axios.post('http://localhost:3000/api/v1/reservations', {
         date: reservationData.date,
         city: reservationData.city,
         duration: parseInt(reservationData.duration, 10),
@@ -67,17 +66,13 @@ const ReservationFormNav = () => {
         },
       });
 
-      if (response.status !== 200) {
-        throw new Error('Error creating reservation');
-      }
-
       setReservationData({
         date: '',
         city: '',
         duration: '',
       });
     } catch (error) {
-      return error;
+      console.log(error);
     }
   };
   /* eslint-enable */
@@ -163,7 +158,7 @@ const ReservationFormNav = () => {
                   onChange={handleDurationChange}
                   required
                   className="form-input"
-                  placeholder="Duration"
+                  placeholder="Duration in days"
                 />
               </div>
               <button type="submit" className="form-submit" onClick={() => navigate(-1)}><div className="text-res">Reserve</div></button>
