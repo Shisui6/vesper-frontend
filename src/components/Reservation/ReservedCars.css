@@ -1,0 +1,65 @@
+@import url('https://fonts.cdnfonts.com/css/montserrat');
+
+.reserved-cars {
+  display: flex;
+  margin: 0 auto;
+}
+
+.no-cars-reserved {
+  text-align: center;
+  font-size: 1.5rem;
+  margin: 20% 30%;
+  font-weight: 700;
+}
+
+header {
+  font-size: 1.2rem;
+  font-weight: 700;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 40px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.card-container {
+  width: 80%;
+  height: 100%;
+  margin: 40px auto;
+  position: relative;
+  left: -20px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 8px;
+  border: 1px solid #ddd;
+  font-family: 'Montserrat', sans-serif;
+}
+
+td {
+  color: black;
+}
+
+th {
+  background-color: #98bd2a;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+@media only screen and (min-width: 600px) {
+  table {
+    width: 100%;
+  }
+}
