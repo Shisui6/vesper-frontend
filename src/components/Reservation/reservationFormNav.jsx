@@ -1,69 +1,53 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './ReservationsFormNav.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAuthHeader, useAuthUser } from 'react-auth-kit';
 import { useNavigate } from 'react-router-dom';
+import { DateInput } from '@mantine/dates';
 import {
-  BsFillArrowLeftCircleFill,
-} from 'react-icons/bs';
-import { fetchCars } from '../../redux/cars/cars';
-import Loader from '../Loader/Loader';
+  fetchCars, selectCars, selectIsLoading, selectSelectedCar,
+} from '../../redux/cars/cars';
 
 const ReservationFormNav = () => {
   const [reservationData, setReservationData] = useState({
-    date: '',
     city: '',
     duration: '',
     car_id: '',
   });
+  const [date, setDate] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const auth = useAuthUser();
   const authHeader = useAuthHeader();
   const authentication = authHeader();
-  const [loading, setLoading] = useState(true);
-  const cars = useSelector((state) => state.cars);
+  const cars = useSelector(selectCars);
+  const selectedCar = useSelector(selectSelectedCar);
+  const loading = useSelector(selectIsLoading);
 
   useEffect(() => {
     dispatch(fetchCars(authentication));
-    setTimeout(() => {
-      setLoading(false);
-    }, 2500);
   }, [authentication, dispatch]);
 
-  if (loading) {
-    return <Loader speed={2} />;
-  }
-
-  const handleCarChange = (e) => {
-    setReservationData({ ...reservationData, car_id: e.target.value });
-  };
-
-  const handleDateChange = (e) => {
-    setReservationData({ ...reservationData, date: e.target.value });
-  };
-
-  const handleCityChange = (e) => {
-    setReservationData({ ...reservationData, city: e.target.value });
-  };
-
-  const handleDurationChange = (e) => {
-    setReservationData({ ...reservationData, duration: e.target.value });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setReservationData({ ...reservationData, [name]: value });
   };
 
   const handleSubmit = async (e) => {
-    reservationData.car_id = reservationData.car_id.split(',');
     e.preventDefault();
+    if (reservationData.car) {
+      reservationData.car_id = reservationData.car.split(',');
+    }
+
     try {
       const response = await axios.post('https://vesper-backend.onrender.com/api/v1/reservations', {
         reservation: {
-          date: reservationData.date,
-          car_name: reservationData.car_id[1],
+          date: date.toISOString().substring(0, 10),
+          car_name: selectedCar ? selectedCar.name : reservationData.car_id[1],
           city: reservationData.city,
           duration: parseInt(reservationData.duration, 10),
           user_id: auth().id,
-          car_id: reservationData.car_id[0],
+          car_id: selectedCar ? selectedCar.id : reservationData.car_id[0],
         },
       }, {
         headers: {
@@ -76,7 +60,6 @@ const ReservationFormNav = () => {
       }
 
       setReservationData({
-        date: '',
         city: '',
         duration: '',
       });
@@ -86,96 +69,68 @@ const ReservationFormNav = () => {
   };
 
   return (
-    <>
-      {cars.cars.length === 0 ? (
-        <h1 className="no-cars-page">No cars available to reserve!!</h1>
-      ) : (
-
-        <div className="forms-container">
-          <div className="back-button-div">
-            <button type="button" className="back-button" id="back-arrow" onClick={() => navigate(-1)}>
-              <BsFillArrowLeftCircleFill />
-            </button>
-          </div>
-          <div className="form-wrapper-container">
-            <form onSubmit={handleSubmit} className="forms">
-              <h2 className="headers-title">Reserve a car</h2>
-              <div className="lines" />
-              <p className="infos">
-                There are 34 different versions of the Vesper. Today five series are in
-                production: the classic manual transmission PX and the modern CVT
-                transmission S, LX, GT, and GTS.
-                We have showrooms all over the globe which some include
-                test-riding facilities.
-                If you wish to find out if a
-                test-ride, please make reservation.
-              </p>
-              <div className="input-wrapper">
-                <input
-                  type="text"
-                  id="username"
-                  name="username"
-                  value={auth().username}
-                  readOnly
-                  className="form-input"
-                  placeholder="Username"
-                />
-              </div>
-              <div className="input-wrapper">
-                <select
-                  id="car"
-                  name="car"
-                  onChange={handleCarChange}
-                  required
-                  className="select-fom"
-                >
-                  <option value="">Select a car</option>
-                  {Array.from(cars.cars).map((car) => (
-                    <option value={[car.id, car.name]} key={car.id}>
-                      {car.name}
-                      {' '}
-                      {car.model}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div className="input-wrapper">
-                <input
-                  type="date"
-                  id="date"
-                  name="date"
-                  onChange={handleDateChange}
-                  className="form-input"
-                  placeholder="Date"
-                />
-              </div>
-              <div className="input-wrapper">
-                <input
-                  type="text"
-                  id="city"
-                  name="city"
-                  onChange={handleCityChange}
-                  className="form-input"
-                  placeholder="City"
-                />
-              </div>
-              <div className="input-wrapper">
-                <input
-                  type="number"
-                  id="duration"
-                  name="duration"
-                  onChange={handleDurationChange}
-                  required
-                  className="form-input"
-                  placeholder="Duration in days"
-                />
-              </div>
-              <button type="submit" className="form-submit"><div className="text-res">Reserve</div></button>
-            </form>
-          </div>
-        </div>
-      )}
-    </>
+    <div className="reserve h-[95vh] my-4 mr-4 rounded-2xl pt-20 md:pt-36 relative fade-in">
+      <div className="text-center mb-6 md:mb-0">
+        <h1 className="text-5xl font-medium mb-4">Book, drive, repeat</h1>
+        <p>Find and book your next car</p>
+      </div>
+      <form onSubmit={handleSubmit} className="bg-white w-[85%] md:h-24 rounded-2xl md:absolute md:bottom-16 md:left-0 md:right-0 md:m-auto md:flex-row flex flex-col p-7 gap-5 my-0 mx-auto">
+        {selectedCar ? (
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value={`${selectedCar.name} ${selectedCar.model}`}
+            readOnly
+            className="bg-[#f8f8f8] p-2 rounded-xl md:w-[25%]"
+          />
+        ) : (
+          <select
+            id="car"
+            name="car"
+            onChange={handleChange}
+            required
+            className="bg-[#f8f8f8] p-2 rounded-xl md:w-[25%]"
+          >
+            <option value="">{loading ? 'Loading...' : 'Select a car'}</option>
+            {cars.map((car) => (
+              <option value={[car.id, car.name]} key={car.id}>
+                {car.name}
+                {' '}
+                {car.model}
+              </option>
+            ))}
+          </select>
+        )}
+        <DateInput
+          value={date}
+          minDate={new Date()}
+          onChange={setDate}
+          placeholder="Date"
+          maw={400}
+          mx="auto"
+        />
+        <input
+          type="text"
+          id="city"
+          name="city"
+          onChange={handleChange}
+          className="bg-[#f8f8f8] p-2 rounded-xl md:w-1/4"
+          placeholder="City"
+        />
+        <input
+          type="number"
+          id="duration"
+          min={1}
+          name="duration"
+          onChange={handleChange}
+          required
+          className="bg-[#f8f8f8] p-2 rounded-xl md:w-[25%]"
+          placeholder="Duration in days"
+        />
+        <button type="submit" className="bg-[#181818] text-white p-2 rounded-xl hover:bg-[#2c2c2c] duration-150">Reserve</button>
+      </form>
+    </div>
   );
 };
 

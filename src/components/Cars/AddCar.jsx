@@ -23,6 +23,7 @@ const AddCar = () => {
     const { name, value } = e.target;
     setInfo({ ...info, [name]: value });
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     info.image = `${info.classification}.jpg`;
@@ -42,7 +43,7 @@ const AddCar = () => {
   };
 
   return (
-    <main className="flex overflow-hidden mt-10 h-[87vh] rounded-2xl">
+    <main className="flex overflow-hidden mt-10 h-[87vh] rounded-2xl fade-in">
       <div className=" flex-1 hidden lg:block">
         <img src={img} className="w-full h-screen object-cover" alt="car" />
       </div>

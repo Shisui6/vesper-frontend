@@ -6,11 +6,13 @@ import Navbar from './components/Navbar/Navbar';
 const App = () => {
   const isAuthenticated = useIsAuthenticated();
   const [windowDimension, setWindowDimension] = useState(null);
+  const [authenticated, setAuthenticated] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
     setWindowDimension(window.innerWidth);
-  }, []);
+    setAuthenticated(isAuthenticated());
+  }, [location.pathname]);
 
   useEffect(() => {
     function handleResize() {
@@ -22,7 +24,7 @@ const App = () => {
   }, []);
 
   const margin = () => {
-    if (isAuthenticated() && location.pathname !== '/' && location.pathname !== '/login' && location.pathname !== '/register') {
+    if (authenticated && location.pathname !== '/' && location.pathname !== '/login' && location.pathname !== '/register') {
       if (windowDimension > 768) {
         return { marginLeft: '14.5rem' };
       }
@@ -34,7 +36,7 @@ const App = () => {
   };
 
   const navbar = () => {
-    if (isAuthenticated() && location.pathname !== '/' && location.pathname !== '/login' && location.pathname !== '/register') {
+    if (authenticated && location.pathname !== '/' && location.pathname !== '/login' && location.pathname !== '/register') {
       return <Navbar />;
     }
 

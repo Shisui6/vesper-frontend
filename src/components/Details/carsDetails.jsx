@@ -10,8 +10,7 @@ import {
 import { SlSettings } from 'react-icons/sl';
 import './details.css';
 import Loader from '../Loader/Loader';
-import { fetchCars } from '../../redux/cars/cars';
-import ReservationForm from '../Reservation/ReservationForm';
+import { fetchCars, setSelectedCar } from '../../redux/cars/cars';
 
 const DetailsCarScreen = () => {
   const [loading, setLoading] = useState(true);
@@ -24,9 +23,9 @@ const DetailsCarScreen = () => {
   const { cars } = carDetails;
   const carss = cars?.find((c) => c.id === parseInt(id, 10));
 
-  const [showReservationForm, setShowReservationForm] = useState(false);
   const handleReservationClick = () => {
-    setShowReservationForm(true);
+    dispatch(setSelectedCar(carss));
+    navigate('/reservations');
   };
 
   useEffect(() => {
@@ -55,17 +54,17 @@ const DetailsCarScreen = () => {
   return (
     <>
       {carss && (
-        <div className="flex flex-col items-center md:justify-start justify-center w-full md:flex-row grow h-full lg:pt-20 lg:pb-10">
-          <div className="grow  md:w-5/6 flex items-center justify-center md:px-10 rounded-full aspect-square">
+        <div className=" mt-11 md:mt-0 flex flex-col items-center md:justify-start justify-center w-full md:flex-row grow h-full lg:pt-20 lg:pb-10">
+          <div className="grow md:w-5/6 pr-3 md:pr-0">
             <img
               src={`/${carss?.image}`}
               alt={carss?.name}
-              className="object-cover block rounded-full m-4 aspect-square w-[100%] md:ml-[40%]"
+              className="w-full h-full md:ml-[40%] rounded-2xl"
             />
           </div>
-          <div className="flex flex-col w-full items-start md:items-end  md:mr-10 lg:px-0 text-center details">
+          <div className="flex flex-col w-full md:items-end  md:mr-10 lg:px-0 text-center details">
             <div className="md:items-end details">
-              <h1 className="md:text-right mb-4 text-3xl font-semibold text-slate-800">
+              <h1 className="md:text-right mb-4 text-3xl font-semibold text-slate-800 mt-5">
                 {carss?.name}
               </h1>
               <p className=" mb-10  md:text-right text-gray-500 text-sm">
@@ -94,7 +93,7 @@ const DetailsCarScreen = () => {
                   </li>
                   <li className="odd:bg-gray-200 bg-gray-100 py-2 px-4">
                     <div className="flex items-center justify-between">
-                      <span className="pr-10">Rent per day</span>
+                      <span className="pr-10">Price per day</span>
                       <span className="text-right">
                         $
                         {' '}
@@ -115,10 +114,10 @@ const DetailsCarScreen = () => {
                 {' '}
                 <AiOutlineRight className="text-yellow-500" />
               </p>
-              <div className="mt-6 flex justify-center">
+              <div className="mb-5 md:mb-0 flex justify-center">
                 <button
                   type="button"
-                  className="res-btn bg-lime-500 text-white hover:bg-lime-400 px-6 py-2 rounded-full font-semibold min-w-[10rem] transition-colors border-2 border-transparent"
+                  className="res-btn bg-[#181818] text-white hover:bg-[#2c2c2c] px-6 py-2 rounded-full font-semibold min-w-[10rem] transition-colors border-2 border-transparent"
                   onClick={handleReservationClick}
                 >
                   <div className="flex items-center gap-3 justify-center">
@@ -132,17 +131,10 @@ const DetailsCarScreen = () => {
           </div>
         </div>
       )}
-      {showReservationForm && (
-      <ReservationForm
-        carId={carss.id}
-        carMake={carss.name}
-        year={carss.year}
-      />
-      )}
       <div>
         <button
           className="fixed text-[1.8rem]
-                              bottom-14 left-60 z-10 bg-[#98bd2a] text-white
+                              bottom-14 left-60 z-10 bg-[#181818] text-white
                               rounded-full p-3 cursor-pointer
                               hidden md:block
                               "

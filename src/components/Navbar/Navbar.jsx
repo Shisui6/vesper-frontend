@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { useSignOut } from 'react-auth-kit';
+import { useSignOut, useAuthUser } from 'react-auth-kit';
+import { Avatar } from '@mantine/core';
 import {
   UilCarSideview,
   UilPlus,
@@ -11,6 +12,7 @@ import {
 
 const Navbar = () => {
   const signOut = useSignOut();
+  const auth = useAuthUser();
   const navigate = useNavigate();
   const [windowDimension, setWindowDimension] = useState(null);
 
@@ -37,31 +39,31 @@ const Navbar = () => {
       <nav>
         <ul className="fixed top-0 bottom-0 shadow-lg rounded-r-xl mx-0 my-auto h-fit">
           <li>
-            <NavLink to="cars" className="Navlink flex gap-2 p-3 rounded-tr-xl mb-2 text-sm items-center cursor-pointer hover:text-white hover:bg-[#97bf0f] duration-100" style={({ isActive }) => (isActive ? { backgroundColor: '#97bf0f', color: '#fff' } : {})}>
+            <NavLink to="cars" className="Navlink flex gap-2 p-3 rounded-tr-xl mb-2 text-sm items-center cursor-pointer hover:bg-[#fafafa] duration-100" style={({ isActive }) => (isActive ? { backgroundColor: '#fafafa', fontWeight: '600' } : {})}>
               <UilCarSideview />
             </NavLink>
           </li>
           <li>
-            <NavLink to="reservations" className="Navlink flex gap-2 p-3 mb-2 text-sm items-center cursor-pointer hover:text-white hover:bg-[#97bf0f] duration-100" style={({ isActive }) => (isActive ? { backgroundColor: '#97bf0f', color: '#fff' } : {})}>
+            <NavLink to="reservations" className="Navlink flex gap-2 p-3 mb-2 text-sm items-center cursor-pointer hover:bg-[#fafafa] duration-100" style={({ isActive }) => (isActive ? { backgroundColor: '#fafafa', fontWeight: '600' } : {})}>
               <UilPlus />
             </NavLink>
           </li>
           <li>
-            <NavLink to="reserved" className="Navlink flex gap-2 p-3 mb-2 text-sm items-center cursor-pointer hover:text-white hover:bg-[#97bf0f] duration-100" style={({ isActive }) => (isActive ? { backgroundColor: '#97bf0f', color: '#fff' } : {})}>
+            <NavLink to="reserved" className="Navlink flex gap-2 p-3 mb-2 text-sm items-center cursor-pointer hover:bg-[#fafafa] duration-100" style={({ isActive }) => (isActive ? { backgroundColor: '#fafafa', fontWeight: '600' } : {})}>
               <UilBook />
             </NavLink>
           </li>
           <li>
-            <NavLink to="addCar" className="Navlink flex gap-2 p-3 mb-2 text-sm items-center cursor-pointer hover:text-white hover:bg-[#97bf0f] duration-100" style={({ isActive }) => (isActive ? { backgroundColor: '#97bf0f', color: '#fff' } : {})}>
+            <NavLink to="addCar" className="Navlink flex gap-2 p-3 mb-2 text-sm items-center cursor-pointer hover:bg-[#fafafa] duration-100" style={({ isActive }) => (isActive ? { backgroundColor: '#fafafa', fontWeight: '600' } : {})}>
               <UilPlusCircle />
             </NavLink>
           </li>
           <li>
-            <NavLink to="deleteCar" className="Navlink flex gap-2 p-3 mb-2 text-sm items-center cursor-pointer hover:text-white hover:bg-[#97bf0f] duration-100" style={({ isActive }) => (isActive ? { backgroundColor: '#97bf0f', color: '#fff' } : {})}>
+            <NavLink to="deleteCar" className="Navlink flex gap-2 p-3 mb-2 text-sm items-center cursor-pointer hover:bg-[#fafafa] duration-100" style={({ isActive }) => (isActive ? { backgroundColor: '#fafafa', fontWeight: '600' } : {})}>
               <UilTrashAlt />
             </NavLink>
           </li>
-          <li className="Navlink flex gap-2 p-3 rounded-br-xl mb-2 text-sm items-center cursor-pointer hover:text-white hover:bg-[#97bf0f] duration-100">
+          <li className="Navlink flex gap-2 p-3 rounded-br-xl mb-2 text-sm items-center cursor-pointer hover:bg-[#fafafa] duration-100">
             <button type="button" onClick={logout} className="flex items-center gap-2">
               <UilSignout />
             </button>
@@ -74,41 +76,41 @@ const Navbar = () => {
   return (
     <nav className="Navbar fixed left-0 top-0 bottom-0 h-screen w-52 shadow-lg flex flex-col justify-between py-10 px-4 fade-in">
       <div className="flex items-center justify-between">
-        <h2 className=" font-extrabold tracking-wide text-2xl">Vesper</h2>
-        <img src="/profile.png" alt="profile" className=" w-10 h-10" />
+        <h2 className=" font-extrabold tracking-wide text-2xl text-[#0e0e0e]">Vesper</h2>
+        <Avatar color="indigo" radius="xl">{auth().username.slice(0, 2).toUpperCase()}</Avatar>
       </div>
       <ul>
         <li>
-          <NavLink to="cars" className="Navlink flex gap-2 p-3 rounded-xl mb-2 text-sm items-center cursor-pointer hover:text-white hover:bg-[#97bf0f] duration-100" style={({ isActive }) => (isActive ? { backgroundColor: '#97bf0f', color: '#fff' } : {})}>
+          <NavLink to="cars" className="Navlink flex gap-2 p-3 rounded-xl mb-2 text-sm items-center cursor-pointer hover:bg-[#fafafa] duration-100" style={({ isActive }) => (isActive ? { backgroundColor: '#fafafa', fontWeight: '600' } : {})}>
             <UilCarSideview />
             Cars
           </NavLink>
         </li>
         <li>
-          <NavLink to="reservations" className="Navlink flex gap-2 p-3 rounded-xl mb-2 text-sm items-center cursor-pointer hover:text-white hover:bg-[#97bf0f] duration-100" style={({ isActive }) => (isActive ? { backgroundColor: '#97bf0f', color: '#fff' } : {})}>
+          <NavLink to="reservations" className="Navlink flex gap-2 p-3 rounded-xl mb-2 text-sm items-center cursor-pointer hover:bg-[#fafafa] duration-100" style={({ isActive }) => (isActive ? { backgroundColor: '#fafafa', fontWeight: '600', fontSize: '13px' } : {})}>
             <UilPlus />
             New Reservation
           </NavLink>
         </li>
         <li>
-          <NavLink to="reserved" className="Navlink flex gap-2 p-3 rounded-xl mb-2 text-sm items-center cursor-pointer hover:text-white hover:bg-[#97bf0f] duration-100" style={({ isActive }) => (isActive ? { backgroundColor: '#97bf0f', color: '#fff' } : {})}>
+          <NavLink to="reserved" className="Navlink flex gap-2 p-3 rounded-xl mb-2 text-sm items-center cursor-pointer hover:bg-[#fafafa] duration-100" style={({ isActive }) => (isActive ? { backgroundColor: '#fafafa', fontWeight: '600' } : {})}>
             <UilBook />
             My Reservations
           </NavLink>
         </li>
         <li>
-          <NavLink to="addCar" className="Navlink flex gap-2 p-3 rounded-xl mb-2 text-sm items-center cursor-pointer hover:text-white hover:bg-[#97bf0f] duration-100" style={({ isActive }) => (isActive ? { backgroundColor: '#97bf0f', color: '#fff' } : {})}>
+          <NavLink to="addCar" className="Navlink flex gap-2 p-3 rounded-xl mb-2 text-sm items-center cursor-pointer hover:bg-[#fafafa] duration-100" style={({ isActive }) => (isActive ? { backgroundColor: '#fafafa', fontWeight: '600' } : {})}>
             <UilPlusCircle />
             Add Car
           </NavLink>
         </li>
         <li>
-          <NavLink to="deleteCar" className="Navlink flex gap-2 p-3 rounded-xl mb-2 text-sm items-center cursor-pointer hover:text-white hover:bg-[#97bf0f] duration-100" style={({ isActive }) => (isActive ? { backgroundColor: '#97bf0f', color: '#fff' } : {})}>
+          <NavLink to="deleteCar" className="Navlink flex gap-2 p-3 rounded-xl mb-2 text-sm items-center cursor-pointer hover:bg-[#fafafa] duration-100" style={({ isActive }) => (isActive ? { backgroundColor: '#fafafa', fontWeight: '600' } : {})}>
             <UilTrashAlt />
             Delete Car
           </NavLink>
         </li>
-        <li className="Navlink flex gap-2 p-3 rounded-xl mb-2 text-sm items-center cursor-pointer hover:text-white hover:bg-[#97bf0f] duration-100">
+        <li className="Navlink flex gap-2 p-3 rounded-xl mb-2 text-sm items-center cursor-pointer hover:bg-[#fafafa] duration-100">
           <button type="button" onClick={logout} className="flex items-center gap-2">
             <UilSignout />
             Logout

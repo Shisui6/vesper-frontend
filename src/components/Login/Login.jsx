@@ -3,7 +3,7 @@ import { useSignIn } from 'react-auth-kit';
 import { useFormik } from 'formik';
 import axios, { AxiosError } from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
-import { UilPrevious, UilRegistered } from '@iconscout/react-unicons';
+import { UilPrevious, UilRegistered, UilSpinner } from '@iconscout/react-unicons';
 import { useSelector } from 'react-redux';
 import { selectNotice } from '../../redux/cars/cars';
 
@@ -22,19 +22,19 @@ const Login = () => {
         values,
       );
 
-      signIn({
+      if (signIn({
         token: response.data.token,
-        expiresIn: 30,
+        expiresIn: 120,
         tokenType: 'Bearer',
         authState: {
           id: response.data.user.id,
           username: response.data.user.username,
         },
-      });
-
-      setTimeout(() => {
-        navigate('/cars');
-      }, 500);
+      })) {
+        setTimeout(() => {
+          navigate('/cars');
+        }, 500);
+      }
     } catch (err) {
       if (err && err instanceof AxiosError) {
         setError(err.response.data.error);
@@ -60,6 +60,13 @@ const Login = () => {
     }
     return '';
   };
+
+  const login = () => (
+    <span className=" flex justify-center items-center gap-3">
+      <UilSpinner className="animate-spin" />
+      Submitting
+    </span>
+  );
 
   return (
     <main className="w-full flex Login">
@@ -95,6 +102,7 @@ const Login = () => {
               <input
                 type="text"
                 required
+                minLength={3}
                 className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
                 placeholder="Username"
                 onChange={formik.handleChange}
@@ -106,6 +114,7 @@ const Login = () => {
               <input
                 type="password"
                 required
+                minLength={6}
                 className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
                 placeholder="Password"
                 onChange={formik.handleChange}
@@ -115,9 +124,10 @@ const Login = () => {
             </div>
             <button
               type="submit"
-              className="w-full px-4 py-2 text-white font-medium bg-green-600 hover:bg-green-500 active:bg-green-600 rounded-2xl duration-150"
+              disabled={formik.isSubmitting}
+              className="w-full px-4 py-2 text-white font-medium bg-green-600 hover:bg-green-500 active:bg-green-600 rounded-2xl duration-150 disabled:bg-slate-400"
             >
-              Login
+              {formik.isSubmitting ? login() : 'Login'}
             </button>
           </form>
           <Link to="/" className="block">

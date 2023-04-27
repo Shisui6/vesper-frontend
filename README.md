@@ -24,7 +24,7 @@
 # 📖 Vesper <a name="about-project"></a>
 
 **Vesper** is a full stack application for all lovers of cars. Create an account, and become part of our car sharing economy. Let your car make money for you by listing it on our platform so others can view and rent. Find and book your dream car today.
-![image](https://user-images.githubusercontent.com/37116322/229910070-8bd50835-1319-463c-a41a-4459f55d83f2.png)
+![image](https://user-images.githubusercontent.com/37116322/234855999-5be5860d-e83a-4ec2-b5e0-aba033fc00f2.png)
 
 ## 🛠 Built With <a name="built-with"></a>
 
@@ -54,21 +54,13 @@
 
 ## 🚀 Live Demo <a name="live-demo"></a>
 
-- [Live Demo Link](https://vesper-4yj8.onrender.com)
+- [Live Demo Link](https://vesper-one.vercel.app/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## 🪵 Link to Backend <a name="key-features"></a>
 
 - [Backend](https://github.com/Shisui6/vesper-backend)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-## 🛹 Kanban Board <a name="key-features"></a>
-
-- Kanban board link: [link](https://github.com/users/Shisui6/projects/1)
-- No of team members: 4
-<img width="960" alt="image" src="https://user-images.githubusercontent.com/37116322/229125297-dc1b0187-e3b0-4c52-a8f4-4f01c143cf6c.png">
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -172,7 +164,6 @@ If you like this project please leave a star🤩
 ## 🙏 Acknowledgments <a name="acknowledgements"></a>
 
 - [Microverse](https://www.microverse.org/)
-- Original design by [Murat Korkmaz](https://www.behance.net/muratk) on behance
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

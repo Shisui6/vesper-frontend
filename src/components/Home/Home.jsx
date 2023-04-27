@@ -43,17 +43,17 @@ const renderSlides = imageData.map((image) => (
     <div className="slide-text">
       <h1>Experience Vesper</h1>
       <p>The ultimate car sharing experience</p>
-      <div className="flex">
+      <div className="flex gap-7">
         <Link to="login">
-          <button type="button">
+          <button type="button" className="hover:bg-white hover:text-black">
             Login
-            <UilSignInAlt color="#fff" />
+            <UilSignInAlt />
           </button>
         </Link>
         <Link to="register">
-          <button type="button">
+          <button type="button" className="bg-white text-black hover:text-white hover:bg-transparent">
             Sign up
-            <UilRegistered color="#fff" />
+            <UilRegistered />
           </button>
         </Link>
       </div>

@@ -1,10 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAuthHeader, useAuthUser } from 'react-auth-kit';
-import axios from 'axios';
+import { useAutoAnimate } from '@formkit/auto-animate/react';
 import { UilTrashAlt } from '@iconscout/react-unicons';
-import { fetchCars, selectCars } from '../../redux/cars/cars';
-import Loader from '../Loader/Loader';
+import 'react-loading-skeleton/dist/skeleton.css';
+import {
+  deleteCar, fetchCars, removeCar, selectCars, selectIsLoading,
+} from '../../redux/cars/cars';
+import CarSkeleton from './CarSkeleton';
+import Modal from '../Modal/Modal';
 
 const DeleteCar = () => {
   const authHeader = useAuthHeader();
@@ -13,26 +17,57 @@ const DeleteCar = () => {
   const auth = useAuthUser();
   const cars = useSelector(selectCars);
   const filteredCars = cars.filter((car) => car.user_id === auth().id);
-  const [loading, setLoading] = useState(true);
+  const loading = useSelector(selectIsLoading);
+  const [animationParent] = useAutoAnimate();
+  const [showModal, setShowModal] = useState(false);
+  const [selectedCar, setSelectedCar] = useState({});
 
   useEffect(() => {
     dispatch(fetchCars(authentication));
-    setTimeout(() => {
-      setLoading(false);
-    }, 2500);
   }, [authentication, dispatch]);
 
-  const handleDelete = async (id) => {
-    await axios.delete(`https://vesper-backend.onrender.com/api/v1/cars/${id}`, {
-      headers: {
-        Authorization: authHeader(),
-      },
-    });
-    dispatch(fetchCars(authHeader()));
+  const handleDelete = (car) => {
+    setSelectedCar(car);
+    setShowModal(true);
+  };
+
+  const handleCancel = () => {
+    setShowModal(false);
+  };
+
+  const handleConfirm = () => {
+    const data = {
+      id: selectedCar.id,
+      auth: authentication,
+    };
+
+    dispatch(deleteCar(data));
+    setShowModal(false);
+    dispatch(removeCar(selectedCar.id));
   };
 
   if (loading) {
-    return <Loader speed={2} />;
+    return (
+      <section className="py-14 fade-in">
+        <div className="max-w-screen-xl mx-auto px-4 text-center md:px-8">
+          <div className="max-w-xl mx-auto">
+            <h3 className="text-gray-800 text-3xl font-semibold sm:text-4xl">
+              Manage Your Cars
+            </h3>
+            <p className="text-gray-600 mt-2 text-xs">
+              Please select a car from the list to remove it.
+            </p>
+          </div>
+          <div className="mt-12">
+            <ul className="grid gap-8 sm:grid-cols-2 md:grid-cols-3" ref={animationParent}>
+              <CarSkeleton />
+              <CarSkeleton />
+              <CarSkeleton />
+            </ul>
+          </div>
+        </div>
+      </section>
+    );
   }
 
   if (filteredCars.length === 0) {
@@ -41,7 +76,7 @@ const DeleteCar = () => {
         <div className="max-w-screen-xl mx-auto px-4 text-center md:px-8">
           <div className="max-w-xl mx-auto">
             <h3 className="text-gray-800 text-3xl font-semibold sm:text-4xl">
-              Remove Car
+              Manage Your Cars
             </h3>
             <p className="text-gray-600 mt-2 text-xs">
               Please select a car from the list to remove it.
@@ -62,28 +97,28 @@ const DeleteCar = () => {
         <div className="max-w-screen-xl mx-auto px-4 text-center md:px-8">
           <div className="max-w-xl mx-auto">
             <h3 className="text-gray-800 text-3xl font-semibold sm:text-4xl">
-              Remove Car
+              Manage Your Cars
             </h3>
             <p className="text-gray-600 mt-2 text-xs">
               Please select a car from the list to remove it.
             </p>
           </div>
           <div className="mt-12">
-            <ul className="grid gap-8 sm:grid-cols-2 md:grid-cols-3">
+            <ul className="grid gap-8 sm:grid-cols-2 md:grid-cols-3" ref={animationParent}>
               {filteredCars.map((car) => (
-                <li key={car.id}>
-                  <div className="w-40 h-40 mx-auto">
+                <li key={car.id} className="rounded-xl shadow-md pb-6">
+                  <div className="h-60">
                     <img
                       src={`/${car.image}`}
-                      className="w-full h-full rounded-full"
+                      className="w-full h-full rounded-t-xl"
                       alt=""
                     />
                   </div>
-                  <div className="flex justify-between w-[50%] items-center mt-5 mx-auto">
-                    <h4 className="text-gray-700 font-semibold sm:text-lg">
+                  <div className="flex justify-between mt-5 px-6">
+                    <h4 className="text-[#353537] font-semibold sm:text-lg">
                       {car.name}
                     </h4>
-                    <button type="button" className=" text-red-600 w-5 h-5 duration-150 hover:text-red-800" onClick={() => handleDelete(car.id)}>
+                    <button type="button" className=" text-red-600 w-5 h-5 duration-150 hover:text-red-800" onClick={() => handleDelete(car)}>
                       <UilTrashAlt />
                     </button>
                   </div>
@@ -94,6 +129,12 @@ const DeleteCar = () => {
         </div>
       </section>
 
+      <Modal
+        showModal={showModal}
+        onCancel={handleCancel}
+        car={selectedCar}
+        onConfirm={handleConfirm}
+      />
     </>
   );
 };

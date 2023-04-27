@@ -55,7 +55,7 @@ code {
 }
 
 #error-page {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../public/error.jpg');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/error.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -79,13 +79,26 @@ code {
 }
 
 .login {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../public/login.jpg');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/login.jpg');
   background-size: cover;
 }
 
 .register {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../public/register.jpg');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/register.jpg');
   background-size: cover;
+}
+
+.reserve {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('/reserve.jpg');
+  background-size: cover;
+}
+
+.mantine-DateInput-input {
+  background-color: #f8f8f8;
+  padding: 0.5rem;
+  height: 40px;
+  border-radius: 0.75rem;
+  border: none;
 }
 
 .fade-in {

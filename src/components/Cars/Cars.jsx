@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAuthHeader, useAuthUser } from 'react-auth-kit';
 import { Link } from 'react-router-dom';
-import { UilBookOpen, UilHeart } from '@iconscout/react-unicons';
+import { UilBookOpen } from '@iconscout/react-unicons';
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../Loader/Loader';
 import { fetchCars, selectCars } from '../../redux/cars/cars';
@@ -18,11 +18,11 @@ const Cars = () => {
     dispatch(fetchCars(authentication));
     setTimeout(() => {
       setLoading(false);
-    }, 3800);
+    }, 2500);
   }, [authentication, dispatch]);
 
   if (loading) {
-    return <Loader speed={1.5} />;
+    return <Loader />;
   }
 
   if (cars.length === 0) {
@@ -50,8 +50,8 @@ const Cars = () => {
 
   return (
     <section className="py-14 fade-in">
-      <div className="max-w-screen-xl mx-auto px-4 text-center md:px-8">
-        <div className="max-w-xl mx-auto">
+      <div className="max-w-screen-xl mx-auto px-4 md:px-8">
+        <div className="max-w-xl mx-auto text-center">
           <h3 className="text-gray-800 text-3xl font-semibold sm:text-4xl">
             Welcome
             {' '}
@@ -64,29 +64,35 @@ const Cars = () => {
         <div className="mt-12">
           <ul className="grid gap-8 sm:grid-cols-2 md:grid-cols-3">
             {cars.map((car) => (
-              <li key={car.id}>
-                <div className="w-40 h-40 mx-auto">
+              <li key={car.id} className="rounded-xl shadow-md pb-6">
+                <div className="h-60">
                   <img
                     src={`/${car.image}`}
-                    className="w-full h-full rounded-full"
+                    className="w-full h-full rounded-t-xl"
                     alt=""
                   />
                 </div>
-                <div className="mt-2">
-                  <h4 className="text-gray-700 font-semibold sm:text-lg">
-                    {car.name}
-                  </h4>
-                  <p className="text-gray-600 mt-2 text-xs">
-                    {car.description}
-                  </p>
-                  <div className="mt-4 flex justify-center gap-4 text-gray-400">
+                <div className="mt-2 px-6">
+                  <div className="flex justify-between mt-5">
+                    <h4 className=" text-[#353537] font-semibold sm:text-lg">
+                      {car.name}
+                    </h4>
+                    <p className="font-semibold text-[#b3b7c5]">
+                      $
+                      {' '}
+                      {car.price_per_day}
+                    </p>
+                  </div>
+                  <div className="flex justify-between mt-4 px-1">
+                    <p className="text-gray-600 mt-2 text-xs w-3/4">
+                      {car.description}
+                    </p>
                     <Link
                       to={`/cars/${car.id}`}
-                      className="w-5 h-5 duration-150 hover:text-gray-500"
+                      className="w-5 h-5 duration-150 text-[#353537] hover:text-[#b3b7c5]"
                     >
                       <UilBookOpen />
                     </Link>
-                    <UilHeart />
                   </div>
                 </div>
               </li>

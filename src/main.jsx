@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { AuthProvider, RequireAuth } from 'react-auth-kit';
+import { MantineProvider } from '@mantine/core';
 import store from './redux/configureStore';
 import App from './App';
 import Home from './components/Home/Home';
@@ -94,7 +95,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         cookieDomain={window.location.hostname}
         cookieSecure={false}
       >
-        <RouterProvider router={router} />
+        <MantineProvider withGlobalStyles withNormalizeCSS>
+          <RouterProvider router={router} />
+        </MantineProvider>
       </AuthProvider>
     </Provider>
   </React.StrictMode>,
